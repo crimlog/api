@@ -1,0 +1,24 @@
+name: Code Scan
+on:
+    push:
+        branches: [dev]
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    detect-duplicate-actions:
+        uses: ./.github/workflows/detect-duplicate-actions.yml
+    gitleaks:
+        name: gitleaks
+        needs: detect-duplicate-actions
+        if: ${{ needs.detect-duplicate-actions.outputs.should_skip != 'true' }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - run: wget -O .gitleaks.toml https://raw.githubusercontent.com/elijaholmos/.github/main/workflows/config/.gitleaks.toml
+            - uses: gitleaks/gitleaks-action@v2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITLEAKS_NOTIFY_USER_LIST: '@elijaholmos'
