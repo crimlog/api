@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "moduleResolution": "Node", // required!
+        "esModuleInterop": true, // required!
+        "target": "ES2017",
+        "strict": true,
+    },
+}
