@@ -1,0 +1,13 @@
+info:
+    title: CrimLog Internal GraphQL API Reference
+    description: Full documentation of the CrimLog internal GraphQL API schema
+
+introspection:
+    schemaFile: ./graphql/schema.graphql
+    spectaqlDirective:
+        enable: true
+
+servers:
+    - url: https://example.com/graphql
+      description: Currently unimplemented
+      production: false
