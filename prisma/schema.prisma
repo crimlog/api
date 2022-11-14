@@ -31,17 +31,17 @@ model Professor {
 }
 
 model Course {
-    id               String             @id @default(auto()) @map("_id") @db.ObjectId
-    code             String
-    name             String
-    professorId      String             @db.ObjectId
-    professor        Professor          @relation(fields: [professorId], references: [id])
-    studentIds       Int[]
-    students         Student[]          @relation(fields: [studentIds], references: [id])
-    honorsStudentIds Int[]
-    honorsStudents   Student[]          @relation(name: "honorsStudents", fields: [honorsStudentIds], references: [id])
-    attendanceRecord AttendanceRecord[]
-    attendanceQueue  AttendanceQueue[]
+    id                String             @id @default(auto()) @map("_id") @db.ObjectId
+    code              String
+    name              String
+    professorId       String             @db.ObjectId
+    professor         Professor          @relation(fields: [professorId], references: [id])
+    studentIds        Int[]
+    students          Student[]          @relation(fields: [studentIds], references: [id])
+    honorsStudentIds  Int[]
+    honorsStudents    Student[]          @relation(name: "honorsStudents", fields: [honorsStudentIds], references: [id])
+    attendanceRecords AttendanceRecord[]
+    attendanceQueues  AttendanceQueue[]
 }
 
 model AttendanceRecord {
