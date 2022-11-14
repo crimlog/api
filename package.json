@@ -5,7 +5,8 @@
 	"private": true,
 	"type": "module",
 	"engines": {
-		"node": ">= 16.18.0"
+		"node": ">=16.18.0",
+		"pnpm": ">=7.0.0"
 	},
 	"scripts": {
 		"docs": "spectaql -D spectaql.yml",
@@ -19,7 +20,7 @@
 		"@prisma/client": "4.6.1"
 	},
 	"devDependencies": {
-		"@types/node": "18.11.9",
+		"@types/node": "16.18.0",
 		"bson": "4.7.0",
 		"prisma": "4.6.1",
 		"spectaql": "1.5.8",
