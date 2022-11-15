@@ -121,6 +121,11 @@ type Query {
 		"[`CardId`]({{Types.CardId}}) of the [`Student`]({{Types.Student}}) to retrieve"
 		cardId: CardId!
 	): Student
+
+	# Handled by collation?
+	"Retrieve all [`AttendanceQueues`]({{Types.AttendanceQueue}}) with a `status` of "
+	#activeAttendanceQueues: [AttendanceQueue]!
+	#studentActiveAttendanceQueues(studentId: Int!): [AttendanceQueue]!
 }
 
 type Mutation {

@@ -14,12 +14,15 @@
 		"prisma:generate": "prisma generate",
 		"prisma:generate:w": "prisma generate --watch",
 		"prisma:push": "prisma db push --skip-generate",
-		"prisma:seed": "prisma db seed"
+		"prisma:seed": "prisma db seed",
+		"graphql-codegen": "graphql-codegen --config graphql-codegen.yml"
 	},
 	"dependencies": {
 		"@prisma/client": "4.6.1"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "2.13.12",
+		"@graphql-codegen/typescript": "2.8.2",
 		"@types/node": "16.18.0",
 		"bson": "4.7.0",
 		"prisma": "4.6.1",

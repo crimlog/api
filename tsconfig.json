@@ -1,9 +1,15 @@
 {
     "compilerOptions": {
-        "module": "ESNext",
-        "moduleResolution": "Node", // required!
-        "esModuleInterop": true, // required!
-        "target": "ES2017",
-        "strict": true,
+        "target": "ES2018",
+        "moduleResolution": "node16",
+        "module": "node16",
+        "outDir": "dist"
     },
+    // "compilerOptions": {
+    //     "module": "ESNext",
+    //     "moduleResolution": "Node", // required!
+    //     "esModuleInterop": true, // required!
+    //     "target": "ES2017",
+    //     "strict": true,
+    // },
 }
