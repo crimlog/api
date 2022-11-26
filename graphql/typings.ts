@@ -80,6 +80,47 @@ export type Course = {
   students: Array<Student>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Add a [`Student`]({{Types.Student}}) to an existing [`AttendanceQueue`]({{Types.AttendanceQueue}}) */
+  attendanceQueueAddStudent?: Maybe<AttendanceQueue>;
+  /** Manually close an [`AttendanceQueue`]({{Types.AttendanceQueue}}) */
+  attendanceQueueClose?: Maybe<AttendanceQueue>;
+  /** The created [`AttendanceQueue`]({{Types.AttendanceQueue}})'s will be automatically set to `ACTIVE` */
+  attendanceQueueCreate?: Maybe<AttendanceQueue>;
+  /** Mint an [`AttendanceRecord`]({{Types.AttendanceRecord}}) for all [`Students`]({{Types.Student}}) in an [`AttendanceQueue`]({{Types.AttendanceQueue}}), automatically closing the queue afterewards */
+  attendanceQueueMint?: Maybe<Array<Maybe<AttendanceRecord>>>;
+  /** Remove a [`Student`]({{Types.Student}}) from an existing [`AttendanceQueue`]({{Types.AttendanceQueue}}) */
+  attendanceQueueRemoveStudent?: Maybe<AttendanceQueue>;
+};
+
+
+export type MutationAttendanceQueueAddStudentArgs = {
+  queueId: Scalars['ID'];
+  studentId: Scalars['ID'];
+};
+
+
+export type MutationAttendanceQueueCloseArgs = {
+  queueId: Scalars['ID'];
+};
+
+
+export type MutationAttendanceQueueCreateArgs = {
+  attendanceQueue: AttendanceQueueInput;
+};
+
+
+export type MutationAttendanceQueueMintArgs = {
+  queueId: Scalars['ID'];
+};
+
+
+export type MutationAttendanceQueueRemoveStudentArgs = {
+  queueId: Scalars['ID'];
+  studentId: Scalars['ID'];
+};
+
 /** A university professor */
 export type Professor = {
   __typename?: 'Professor';
@@ -89,6 +130,62 @@ export type Professor = {
   id: Scalars['ID'];
   /** Last name */
   last: Scalars['String'];
+};
+
+export type Query = {
+  __typename?: 'Query';
+  /** Retrieve a single [`AttendanceQueue`]({{Types.AttendanceQueue}}) by ID */
+  attendanceQueue?: Maybe<AttendanceQueue>;
+  /** Retrieve all [`AttendanceQueues`]({{Types.AttendanceQueue}}) */
+  attendanceQueues: Array<Maybe<AttendanceQueue>>;
+  /** Retrieve a single [`AttendanceRecord`]({{Types.AttendanceRecord}}) by ID */
+  attendanceRecord?: Maybe<AttendanceRecord>;
+  /** Retrieve all [`AttendanceRecords`]({{Types.AttendanceRecord}}) */
+  attendanceRecords: Array<Maybe<AttendanceRecord>>;
+  /** Retrieve a single [`Course`]({{Types.Course}}) by ID */
+  course?: Maybe<Course>;
+  /** Retrieve all [`Courses`]({{Types.Course}}) */
+  courses: Array<Maybe<Course>>;
+  /** Retrieve a single [`Professor`]({{Types.Professor}}) by ID */
+  professor?: Maybe<Professor>;
+  /** Retrieve all [`Professors`]({{Types.Professor}}) */
+  professors: Array<Maybe<Professor>>;
+  /** Retrieve a single [`Student`]({{Types.Student}}) by ID */
+  student?: Maybe<Student>;
+  /** Retrieve a single [`Student`]({{Types.Student}}) by their [`CardId`]({{Types.CardId}}) */
+  studentByCardId?: Maybe<Student>;
+  /** Retrieve all [`Students`]({{Types.Student}}) */
+  students: Array<Maybe<Student>>;
+};
+
+
+export type QueryAttendanceQueueArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryAttendanceRecordArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryCourseArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryProfessorArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryStudentArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryStudentByCardIdArgs = {
+  cardId: Scalars['CardId'];
 };
 
 /** A university student */

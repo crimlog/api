@@ -123,7 +123,7 @@ type Query {
 	): Student
 
 	# Handled by collation?
-	"Retrieve all [`AttendanceQueues`]({{Types.AttendanceQueue}}) with a `status` of "
+	# Retrieve all [`AttendanceQueues`]({{Types.AttendanceQueue}}) with a `status` of
 	#activeAttendanceQueues: [AttendanceQueue]!
 	#studentActiveAttendanceQueues(studentId: Int!): [AttendanceQueue]!
 }
