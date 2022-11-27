@@ -1,11 +1,3 @@
-input SpectaQLOption {
-	key: String!
-	value: String!
-}
-directive @spectaql(
-	options: [SpectaQLOption]
-) on SCHEMA | SCALAR | OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | INTERFACE | UNION | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
-
 "The unique identifier for the student's NFC card"
 scalar CardId @spectaql(options: [{ key: "example", value: "20:63:87:62:01:02" }])
 "Time (in milliseconds) since the UNIX Epoch"
