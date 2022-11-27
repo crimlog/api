@@ -13,7 +13,6 @@ specifiers:
   '@types/node': 16.18.0
   apollo-server-core: 3.11.1
   apollo-server-express: 3.11.1
-  bson: 4.7.0
   graphql: 16.6.0
   prisma: 4.6.1
   reflect-metadata: 0.1.13
@@ -40,7 +39,6 @@ devDependencies:
   '@nestjs/cli': 9.1.5
   '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
   '@types/node': 16.18.0
-  bson: 4.7.0
   prisma: 4.6.1
   spectaql: 1.5.9_lav4zhnhs2sde6hud7fh2hdmwi
   ts-node: 10.9.1_yycniztvs25mi3pxrdtzbgr3je
@@ -2729,13 +2727,6 @@ packages:
     resolution: {integrity: sha512-gQxTNE/GAfIIrmHLUE3oJyp5FO6HRBfhjnw4/wMmA63ZGDJnWBmgY/lyQBpnDUkGmAhbSe39tx2d/iTOAfglwQ==}
     dependencies:
       node-int64: 0.4.0
-    dev: true
-
-  /bson/4.7.0:
-    resolution: {integrity: sha512-VrlEE4vuiO1WTpfof4VmaVolCVYkYTgB9iWgYNOrVlnifpME/06fhFRmONgBhClD5pFC1t9ZWqFUQEQAzY43bA==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      buffer: 5.7.1
     dev: true
 
   /buffer-equal-constant-time/1.0.1:

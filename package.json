@@ -35,7 +35,6 @@
 		"@nestjs/cli": "9.1.5",
 		"@nestjs/platform-express": "9.2.0",
 		"@types/node": "16.18.0",
-		"bson": "4.7.0",
 		"prisma": "4.6.1",
 		"spectaql": "1.5.9",
 		"ts-node": "10.9.1",
