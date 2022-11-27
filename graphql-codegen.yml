@@ -1,0 +1,12 @@
+overwrite: true
+watch: false
+schema: './graphql/schema.graphql'
+emitLegacyCommonJSImports: false
+generates:
+    graphql/typings.ts:
+        plugins:
+            - typescript
+        config:
+            scalars:
+                CardId: string
+                Timestamp: number
