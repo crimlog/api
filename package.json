@@ -41,6 +41,6 @@
 		"typescript": "4.9.3"
 	},
 	"prisma": {
-		"seed": "node --loader ts-node/esm prisma/seed.ts"
+		"seed": "node -r ts-node/register prisma/seed.ts"
 	}
 }
