@@ -6,14 +6,14 @@ The CrimLog API is the backbone of the CrimLog protocol. It is a [GraphQL](https
 
 ## Prerequisites
 
--   Node.js v16.13 or greater (https://nodejs.org/en/download/releases/)
+-   Node.js v16.18 or greater (https://nodejs.org/en/download/releases/)
 -   pnpm v7.x (https://pnpm.io/installation)
 -   Git (https://git-scm.com/downloads)
 -   MongoDB (https://www.mongodb.com/docs/manual/tutorial/getting-started/)
 
 ## Install Dependencies
 
-This is a [pnpm](https://pnpm.io/) project, and the usage of other package managers such as npm or yarn is strongly discouraged. In any Node.js environment >= v16.17, pnpm can be enabled using the built-in [Corepack](https://nodejs.org/api/corepack.html) API. Run the following commands to setup pnpm on your system:
+This is a [pnpm](https://pnpm.io/) project, and the usage of other package managers such as npm or yarn is strongly discouraged. After installing Node.js, pnpm can be enabled using the built-in [Corepack](https://nodejs.org/api/corepack.html) API. Run the following commands to setup pnpm on your system:
 
 ```cmd
 corepack enable
@@ -26,7 +26,7 @@ Once pnpm has been enabled on your system, navigate to the root directory and ex
 pnpm install --frozen-lockfile
 ```
 
-This command may take some time to run.
+This command locally installs all the project dependencies may take some time to run.
 
 Afterwards, setup a template `.env` file by copying the contents of the `.env.sample` file into a new `.env` file located in the root.
 
