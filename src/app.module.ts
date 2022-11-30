@@ -22,15 +22,8 @@ import { PrismaModule } from '../prisma/prisma.module';
 					: ApolloServerPluginLandingPageLocalDefault(),
 			],
 			typePaths: ['./**/*/*.graphql'],
-			//   typeDefs: (() => {
-			//     const files = loadFilesSync(['src/**/*.graphql', 'graphql/**/*.graphql'])
-			//       .map((val) => val?.loc?.source?.body ?? val.toString())
-			//       .join('\n');
-			//     return graphqls2s.transpileSchema(files);
-			//   })(),
-			//resolvers: { DateTime: GraphQLDateTime, FilterOperator, FilterValue },
-			//so, this lets us leverage the root-level "errors" property returned in the response json
-			//(on the same level as data)
+			// so, this lets us leverage the root-level "errors" property returned in the response json
+			// (on the same level as data)
 			formatError: (error: GraphQLError) => {
 				const graphQLFormattedError: GraphQLFormattedError = {
 					message: error.extensions?.exception?.code || error.message,
