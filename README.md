@@ -30,17 +30,6 @@ This command locally installs all the project dependencies may take some time to
 
 Afterwards, setup a template `.env` file by copying the contents of the `.env.sample` file into a new `.env` file located in the root.
 
-## Database
-
-[MongoDB](https://www.mongodb.com/) is the API's database provider. Once you've created your own MongoDB instance, obtain the connection string and set that as the value of the `DATABASE_URL` environment variable.
-
-To seed your database with some sample data, first run the ` prisma:push` script. This will apply the Prisma schema to your newly-created Mongo database. Then execute the `prisma:seed` script to populate the database.
-
-```cmd
-pnpm prisma:push
-pnpm prisma:seed
-```
-
 ## Auto-generated Code
 
 CrimLog makes use of several code generation tools to improve the development experience. It is important to regenerate files after making changes to certain areas of the codebase.
@@ -49,7 +38,7 @@ CrimLog makes use of several code generation tools to improve the development ex
 
 [Prisma](https://prisma.io/), an ORM, provides complete and thorough TypeScript types for all database models and queries. The `schema.prisma` file is the single source of truth for these types.
 
-Whenever the `schema.prisma` is updated, the `prisma:generate` script will need to be run to regenerate the Prisma types. Alternativel, `prisma:generate:w` can be run once to continuously watch the Prisma schema file and regenerate types automatically on save.
+Whenever the `schema.prisma` is updated, the `prisma:generate` script will need to be run to regenerate the Prisma types. Alternativel, `prisma:generate:w` can be run once to continuously watch the Prisma schema file and regenerate types automatically on save. Run this command to autogenerate the entire Prisma client into your `node_modules/` folder (necessary before proceeding to the [Database](#database) section):
 
 ```cmd
 pnpm prisma:generate
@@ -65,6 +54,17 @@ Whenever any GraphQL file is updated, the `graphql-codegen` script should be run
 
 ```cmd
 pnpm graphql-codegen
+```
+
+## Database
+
+[MongoDB](https://www.mongodb.com/) is the API's database provider. Once you've created your own MongoDB instance, obtain the connection string and set that as the value of the `DATABASE_URL` environment variable.
+
+To seed your database with some sample data, first run the ` prisma:push` script. This will apply the Prisma schema to your newly-created Mongo database. Then execute the `prisma:seed` script to populate the database.
+
+```cmd
+pnpm prisma:push
+pnpm prisma:seed
 ```
 
 ## Nest.js API
