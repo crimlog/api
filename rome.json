@@ -1,0 +1,31 @@
+{
+	"formatter": {
+		"ignore": ["./node_modules/**/*", "./dist/**/*", "./public/**/*", "typings.ts"],
+		"indentStyle": "tab",
+		"indentSize": 4,
+		"lineWidth": 100
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"linter": {
+		"ignore": ["./node_modules/**/*", "./dist/**/*", "./public/**/*", "typings.ts"],
+		"rules": {
+			"complexity": {
+				"noExtraBooleanCast": "off"
+			},
+			"correctness": {
+				"noDelete": "off"
+			},
+			"style": {
+				"useBlockStatements": "off",
+				"noNegationElse": "off"
+			},
+			"nursery": {
+				"noExplicitAny": "warn"
+			}
+		}
+	}
+}
