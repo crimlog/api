@@ -1,9 +1,19 @@
 {
     "compilerOptions": {
-        "module": "ESNext",
-        "moduleResolution": "Node", // required!
-        "esModuleInterop": true, // required!
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
         "target": "ES2017",
         "strict": true,
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "incremental": true,
+        "skipLibCheck": true
     },
 }

@@ -52,80 +52,84 @@ const _attendanceQueue: AttendanceQueue = {
 	timestamp: Date.now(),
 };
 
-try {
-	//Seed data
-	console.log(`Creating student ${_student.first} ${_student.last}...`);
-	const student = await prisma.student.upsert({
-		where: { id: _student.id },
-		update: {},
-		create: _student,
-	});
-	console.log(`Student ${student.first} ${student.last} created with ID ${student.id}`);
+(async function () {
+	try {
+		//Seed data
+		console.log(`Creating student ${_student.first} ${_student.last}...`);
+		const student = await prisma.student.upsert({
+			where: { id: _student.id },
+			update: {},
+			create: _student,
+		});
+		console.log(`Student ${student.first} ${student.last} created with ID ${student.id}`);
 
-	console.log(`Creating professor ${_professor.first} ${_professor.last}...`);
-	const professor = await prisma.professor.upsert({
-		where: { id: _professor.id },
-		update: {},
-		create: _professor,
-	});
-	console.log(`Professor ${professor.first} ${professor.last} created with ID ${professor.id}`);
+		console.log(`Creating professor ${_professor.first} ${_professor.last}...`);
+		const professor = await prisma.professor.upsert({
+			where: { id: _professor.id },
+			update: {},
+			create: _professor,
+		});
+		console.log(
+			`Professor ${professor.first} ${professor.last} created with ID ${professor.id}`
+		);
 
-	console.log(`Creating course ${_course.code} ${_course.name}...`);
-	const course = await prisma.course.upsert({
-		where: { id: _course.id },
-		update: {},
-		create: _course,
-	});
-	console.log(`Course ${course.code} ${course.name} created with ID ${course.id}`);
+		console.log(`Creating course ${_course.code} ${_course.name}...`);
+		const course = await prisma.course.upsert({
+			where: { id: _course.id },
+			update: {},
+			create: _course,
+		});
+		console.log(`Course ${course.code} ${course.name} created with ID ${course.id}`);
 
-	console.log(`Creating attendance record...`);
-	const attendanceRecord = await prisma.attendanceRecord.upsert({
-		where: { id: _attendanceRecord.id },
-		update: {},
-		create: _attendanceRecord,
-	});
-	console.log(`Attendance record created with ID ${attendanceRecord.id}`);
+		console.log(`Creating attendance record...`);
+		const attendanceRecord = await prisma.attendanceRecord.upsert({
+			where: { id: _attendanceRecord.id },
+			update: {},
+			create: _attendanceRecord,
+		});
+		console.log(`Attendance record created with ID ${attendanceRecord.id}`);
 
-	console.log(`Creating attendance queue...`);
-	const attendanceQueue = await prisma.attendanceQueue.upsert({
-		where: { id: _attendanceQueue.id },
-		update: {},
-		create: _attendanceQueue,
-	});
-	console.log(`Attendance queue created with ID ${attendanceQueue.id}`);
+		console.log(`Creating attendance queue...`);
+		const attendanceQueue = await prisma.attendanceQueue.upsert({
+			where: { id: _attendanceQueue.id },
+			update: {},
+			create: _attendanceQueue,
+		});
+		console.log(`Attendance queue created with ID ${attendanceQueue.id}`);
 
-	// Establish relationships
-	console.log(
-		`Enrolling student ${student.first} ${student.last} in course ${course.code} ${course.name}...`
-	);
-	await prisma.course.update({
-		where: { id: course.id },
-		data: {
-			students: {
-				connect: [{ id: student.id }],
+		// Establish relationships
+		console.log(
+			`Enrolling student ${student.first} ${student.last} in course ${course.code} ${course.name}...`
+		);
+		await prisma.course.update({
+			where: { id: course.id },
+			data: {
+				students: {
+					connect: [{ id: student.id }],
+				},
 			},
-		},
-	});
-	console.log(
-		`Student ${student.first} ${student.last} enrolled in course ${course.code} ${course.name}`
-	);
+		});
+		console.log(
+			`Student ${student.first} ${student.last} enrolled in course ${course.code} ${course.name}`
+		);
 
-	console.log(
-		`Adding student ${student.first} ${student.last} to attendance queue ${attendanceQueue.id}...`
-	);
-	await prisma.attendanceQueue.update({
-		where: { id: attendanceQueue.id },
-		data: {
-			students: {
-				connect: [{ id: student.id }],
+		console.log(
+			`Adding student ${student.first} ${student.last} to attendance queue ${attendanceQueue.id}...`
+		);
+		await prisma.attendanceQueue.update({
+			where: { id: attendanceQueue.id },
+			data: {
+				students: {
+					connect: [{ id: student.id }],
+				},
 			},
-		},
-	});
-	console.log(
-		`Student ${student.first} ${student.last} added to attendance queue ${attendanceQueue.id}`
-	);
-} catch (e) {
-	console.error(e);
-} finally {
-	prisma.$disconnect();
-}
+		});
+		console.log(
+			`Student ${student.first} ${student.last} added to attendance queue ${attendanceQueue.id}`
+		);
+	} catch (e) {
+		console.error(e);
+	} finally {
+		prisma.$disconnect();
+	}
+})();
