@@ -67,14 +67,6 @@ enum AttendanceQueueStatus {
 	INVALID
 }
 
-interface Test {
-	name: String
-}
-
-type Apple inherits Test {
-	name: String
-}
-
 "A digital queue that contains [`Students`]({{Types.Student}}). Batch operations can be performed on the queue, such as minting [`AttendanceRecords`]({{Types.AttendanceRecord}}) for all students in the queue."
 type AttendanceQueue {
 	"Unique ID of the queue"
