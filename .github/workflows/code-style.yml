@@ -1,0 +1,48 @@
+name: Code Style
+on:
+    pull_request:
+        branches: [dev]
+        paths: ['**.js', '**.ts']
+
+env:
+    # version should be in sync w package.json
+    ROME_VERSION: 11.0.0
+
+jobs:
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Install Rome
+              uses: rome/setup-rome@main
+              with:
+                  version: ${{ env.ROME_VERSION }}
+
+            - name: Check Rome Version
+              run: rome version
+
+            - name: Run Linter
+              # specific flag is required per https://github.com/rome/tools/discussions/3925#discussioncomment-4310702
+              run: rome ci --formatter-enabled=false .
+
+    format:
+        name: Format
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Install Rome
+              uses: rome/setup-rome@main
+              with:
+                  version: ${{ env.ROME_VERSION }}
+
+            - name: Check Rome Version
+              run: rome version
+
+            - name: Run Formatter
+              # specific flag is required per https://github.com/rome/tools/discussions/3925#discussioncomment-4310702
+              run: rome ci --linter-enabled=false .

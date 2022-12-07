@@ -1,5 +1,5 @@
 "The unique identifier for the student's NFC card"
-scalar CardId @spectaql(options: [{ key: "example", value: "20:63:87:62:01:02" }])
+scalar CardId @spectaql(options: [{ key: "example", value: "04:87:67:21:39:61:80" }])
 "Time (in milliseconds) since the UNIX Epoch"
 scalar Timestamp
 

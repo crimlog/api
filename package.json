@@ -8,6 +8,7 @@
 		"pnpm": ">=7.0.0"
 	},
 	"scripts": {
+		"start:dev": "nest start --watch",
 		"docs": "spectaql -D spectaql.yml",
 		"docs:build": "spectaql -1 spectaql.yml",
 		"prisma:generate": "prisma generate",
@@ -15,7 +16,10 @@
 		"prisma:push": "prisma db push --skip-generate",
 		"prisma:seed": "prisma db seed",
 		"graphql-codegen": "graphql-codegen --config graphql-codegen.yml",
-		"start:dev": "nest start --watch"
+		"format": "yarn rome format .",
+		"format:fix": "yarn rome format . --write",
+		"lint": "yarn rome check .",
+		"lint:fix": "yarn rome check . --apply-suggested"
 	},
 	"dependencies": {
 		"@nestjs/apollo": "10.1.6",
@@ -36,6 +40,7 @@
 		"@nestjs/platform-express": "9.2.0",
 		"@types/node": "16.18.0",
 		"prisma": "4.6.1",
+		"rome": "11.0.0",
 		"spectaql": "1.5.9",
 		"ts-node": "10.9.1",
 		"typescript": "4.9.3"
