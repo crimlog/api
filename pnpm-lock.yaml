@@ -8,6 +8,7 @@ specifiers:
   '@nestjs/common': 9.2.0
   '@nestjs/core': 9.2.0
   '@nestjs/graphql': 10.1.6
+  '@nestjs/mapped-types': 1.2.0
   '@nestjs/platform-express': 9.2.0
   '@prisma/client': 4.6.1
   '@types/node': 16.18.0
@@ -27,6 +28,7 @@ dependencies:
   '@nestjs/common': 9.2.0_yzt46al3aifnexifjjdb4dxxja
   '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
   '@nestjs/graphql': 10.1.6_p6rbgb5jmodmghdppgpovre6ei
+  '@nestjs/mapped-types': 1.2.0_co7ndddg4j2v72erqtf56w33ee
   '@prisma/client': 4.6.1_prisma@4.6.1
   apollo-server-core: 3.11.1_graphql@16.6.0
   apollo-server-express: 3.11.1_5ha345eiak62qiwwva5z4dp6gu

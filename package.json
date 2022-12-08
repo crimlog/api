@@ -26,6 +26,7 @@
 		"@nestjs/common": "9.2.0",
 		"@nestjs/core": "9.2.0",
 		"@nestjs/graphql": "10.1.6",
+		"@nestjs/mapped-types": "1.2.0",
 		"@prisma/client": "4.6.1",
 		"apollo-server-core": "3.11.1",
 		"apollo-server-express": "3.11.1",
