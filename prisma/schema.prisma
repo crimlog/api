@@ -14,9 +14,9 @@ model Student {
     last               String
     walletAddress      String             @unique
     courseIds          String[]           @db.ObjectId
-    courses            Course[]           @relation(fields: [courseIds], references: [id])
+    courses            Course[]           @relation(fields: [courseIds], references: [id], name: "students")
     honorsCourseIds    String[]           @db.ObjectId
-    honorsCourses      Course[]           @relation(name: "honorsStudents", fields: [honorsCourseIds], references: [id])
+    honorsCourses      Course[]           @relation(fields: [honorsCourseIds], references: [id], name: "honorsStudents")
     attendanceRecords  AttendanceRecord[]
     attendanceQueueIds String[]           @db.ObjectId
     attendanceQueues   AttendanceQueue[]  @relation(fields: [attendanceQueueIds], references: [id])
@@ -37,9 +37,9 @@ model Course {
     professorId       String             @db.ObjectId
     professor         Professor          @relation(fields: [professorId], references: [id])
     studentIds        Int[]
-    students          Student[]          @relation(fields: [studentIds], references: [id])
+    students          Student[]          @relation(fields: [studentIds], references: [id], name: "students")
     honorsStudentIds  Int[]
-    honorsStudents    Student[]          @relation(name: "honorsStudents", fields: [honorsStudentIds], references: [id])
+    honorsStudents    Student[]          @relation(fields: [honorsStudentIds], references: [id], name: "honorsStudents")
     attendanceRecords AttendanceRecord[]
     attendanceQueues  AttendanceQueue[]
 }
