@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { courseInclude } from '../prisma-query-types';
 
 @Injectable()
 export class CourseService {
 	constructor(private prisma: PrismaService) {}
 
-	findAll() {
-		return this.prisma.course.findMany();
+	findAll(include = courseInclude) {
+		return this.prisma.course.findMany({ include });
 	}
 
-	findOne(id: string) {
-		return this.prisma.course.findUnique({ where: { id } });
+	findOne(id: string, include = courseInclude) {
+		return this.prisma.course.findUnique({ where: { id }, include });
 	}
 }

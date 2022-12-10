@@ -71,6 +71,6 @@ const getObject = function (includeObj: object, parentTree: ResolveTree) {
 		};
 	}, {});
 
-	//console.log(`${parentName} res:`, res);
+	// console.log(`${parentName} res:`, res);
 	return !Object.keys(res).length ? true : { include: res };
 };
