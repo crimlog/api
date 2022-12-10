@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AttendanceQueueService } from './attendance-queue.service';
 import { AttendanceQueueResolver } from './attendance-queue.resolver';
+import { AttendanceQueueService } from './attendance-queue.service';
 
 @Module({
   providers: [AttendanceQueueResolver, AttendanceQueueService]

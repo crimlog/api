@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ProfessorService } from './professor.service';
 import { ProfessorResolver } from './professor.resolver';
+import { ProfessorService } from './professor.service';
 
 @Module({
   providers: [ProfessorResolver, ProfessorService]
