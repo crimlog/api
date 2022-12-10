@@ -16,4 +16,9 @@ export class StudentResolver {
 	students(@GetIncludeObj(studentInclude) include) {
 		return this.studentService.findAll(include);
 	}
+
+	@Query()
+	studentByCardId(@Args('cardId') cardId: string, @GetIncludeObj(studentInclude) include) {
+		return this.studentService.findOneByCardId(cardId, include);
+	}
 }

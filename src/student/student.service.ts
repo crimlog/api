@@ -13,4 +13,8 @@ export class StudentService {
 	findOne(id: number, include = studentInclude) {
 		return this.prisma.student.findUnique({ where: { id }, include });
 	}
+
+	findOneByCardId(cardId: string, include = studentInclude) {
+		return this.prisma.student.findUnique({ where: { cardId }, include });
+	}
 }
