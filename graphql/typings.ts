@@ -33,9 +33,7 @@ export type AttendanceQueue = {
 /** Input necessary for creating a new [`AttendanceQueue`]({{Types.AttendanceQueue}}) */
 export type AttendanceQueueInput = {
   /** [`Course.id`]({{Types.Course}}) */
-  course: Scalars['ID'];
-  /** [`Professor.id`]({{Types.Professor}}) */
-  professor: Scalars['ID'];
+  courseId: Scalars['ID'];
 };
 
 /** Statuses that an [`AttendanceQueue`]({{Types.AttendanceQueue}}) can be in */
@@ -97,7 +95,7 @@ export type Mutation = {
 
 export type MutationAttendanceQueueAddStudentArgs = {
   queueId: Scalars['ID'];
-  studentId: Scalars['ID'];
+  studentId: Scalars['Int'];
 };
 
 
@@ -118,7 +116,7 @@ export type MutationAttendanceQueueMintArgs = {
 
 export type MutationAttendanceQueueRemoveStudentArgs = {
   queueId: Scalars['ID'];
-  studentId: Scalars['ID'];
+  studentId: Scalars['Int'];
 };
 
 /** A university professor */
@@ -196,7 +194,7 @@ export type Student = {
   /** First name */
   first: Scalars['String'];
   /** University-specific student ID number */
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   /** Last name */
   last: Scalars['String'];
   /** Wallet address */

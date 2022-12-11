@@ -1,4 +1,5 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { AttendanceQueueInput } from '../../graphql/typings';
 import { GetIncludeObj } from '../decorators/getIncludeObj.decorator';
 import { attendanceQueueInclude } from '../prisma-query-types';
 import { AttendanceQueueService } from './attendance-queue.service';
@@ -15,5 +16,47 @@ export class AttendanceQueueResolver {
 	@Query()
 	attendanceQueues(@GetIncludeObj(attendanceQueueInclude) include) {
 		return this.attendanceQueueService.findAll(include);
+	}
+
+	@Mutation()
+	attendanceQueueCreate(
+		@Args('attendanceQueue') attendanceQueue: AttendanceQueueInput,
+		@GetIncludeObj(attendanceQueueInclude) include,
+	) {
+		return this.attendanceQueueService.attendanceQueueCreate(attendanceQueue, include);
+	}
+
+	@Mutation()
+	attendanceQueueAddStudent(
+		@Args('queueId') queueId: string,
+		@Args('studentId') studentId: number,
+		@GetIncludeObj(attendanceQueueInclude) include,
+	) {
+		return this.attendanceQueueService.attendanceQueueAddStudent(queueId, studentId, include);
+	}
+
+	@Mutation()
+	attendanceQueueRemoveStudent(
+		@Args('queueId') queueId: string,
+		@Args('studentId') studentId: number,
+		@GetIncludeObj(attendanceQueueInclude) include,
+	) {
+		return this.attendanceQueueService.attendanceQueueRemoveStudent(queueId, studentId, include);
+	}
+
+	@Mutation()
+	attendanceQueueClose(
+		@Args('queueId') queueId: string,
+		@GetIncludeObj(attendanceQueueInclude) include,
+	) {
+		return this.attendanceQueueService.attendanceQueueClose(queueId, include);
+	}
+
+	@Mutation()
+	attendanceQueueMint(
+		@Args('queueId') queueId: string,
+		@GetIncludeObj(attendanceQueueInclude) include,
+	) {
+		return this.attendanceQueueService.attendanceQueueMint(queueId, include);
 	}
 }
