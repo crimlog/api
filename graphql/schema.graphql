@@ -10,9 +10,9 @@ type Student {
 	"Student's NFC Card uid"
 	cardId: CardId!
 	"First name"
-	first: String! @spectaql(options: [{ key: "example", value: "John" }])
+	first: String! @spectaql(options: [{ key: "example", value: "Melanie" }])
 	"Last name"
-	last: String! @spectaql(options: [{ key: "example", value: "Doe" }])
+	last: String! @spectaql(options: [{ key: "example", value: "Spence" }])
 	"Wallet address"
 	walletAddress: String! @spectaql(options: [{ key: "example", value: "0x1234567890abcdef" }])
 }
@@ -22,9 +22,9 @@ type Professor {
 	"University-specific professor ID number"
 	id: ID! @spectaql(options: [{ key: "example", value: "636fe6844498e9db2cf95606" }])
 	"First name"
-	first: String! @spectaql(options: [{ key: "example", value: "James" }])
+	first: String! @spectaql(options: [{ key: "example", value: "Mark" }])
 	"Last name"
-	last: String! @spectaql(options: [{ key: "example", value: "Jameson" }])
+	last: String! @spectaql(options: [{ key: "example", value: "Reha" }])
 }
 
 "A specific university course"
