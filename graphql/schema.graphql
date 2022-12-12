@@ -6,13 +6,13 @@ scalar Timestamp
 "A university student"
 type Student {
 	"University-specific student ID number"
-	id: ID! @spectaql(options: [{ key: "example", value: "20638761" }])
+	id: Int! @spectaql(options: [{ key: "example", value: 20638761 }])
 	"Student's NFC Card uid"
 	cardId: CardId!
 	"First name"
-	first: String! @spectaql(options: [{ key: "example", value: "John" }])
+	first: String! @spectaql(options: [{ key: "example", value: "Melanie" }])
 	"Last name"
-	last: String! @spectaql(options: [{ key: "example", value: "Doe" }])
+	last: String! @spectaql(options: [{ key: "example", value: "Spence" }])
 	"Wallet address"
 	walletAddress: String! @spectaql(options: [{ key: "example", value: "0x1234567890abcdef" }])
 }
@@ -20,11 +20,11 @@ type Student {
 "A university professor"
 type Professor {
 	"University-specific professor ID number"
-	id: ID! @spectaql(options: [{ key: "example", value: "20638762" }])
+	id: ID! @spectaql(options: [{ key: "example", value: "636fe6844498e9db2cf95606" }])
 	"First name"
-	first: String! @spectaql(options: [{ key: "example", value: "James" }])
+	first: String! @spectaql(options: [{ key: "example", value: "Mark" }])
 	"Last name"
-	last: String! @spectaql(options: [{ key: "example", value: "Jameson" }])
+	last: String! @spectaql(options: [{ key: "example", value: "Reha" }])
 }
 
 "A specific university course"
@@ -82,10 +82,8 @@ type AttendanceQueue {
 
 "Input necessary for creating a new [`AttendanceQueue`]({{Types.AttendanceQueue}})"
 input AttendanceQueueInput {
-	"[`Professor.id`]({{Types.Professor}})"
-	professor: ID!
 	"[`Course.id`]({{Types.Course}})"
-	course: ID!
+	courseId: ID!
 }
 
 type Query {
@@ -139,14 +137,14 @@ type Mutation {
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to add the student to"
 		queueId: ID!
 		"ID of the [`Student`]({{Types.Student}}) to add to the queue"
-		studentId: ID!
+		studentId: Int!
 	): AttendanceQueue
 	"Remove a [`Student`]({{Types.Student}}) from an existing [`AttendanceQueue`]({{Types.AttendanceQueue}})"
 	attendanceQueueRemoveStudent(
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to remove the student from"
 		queueId: ID!
 		"ID of the [`Student`]({{Types.Student}}) to remove from the queue"
-		studentId: ID!
+		studentId: Int!
 	): AttendanceQueue
 	"Manually close an [`AttendanceQueue`]({{Types.AttendanceQueue}})"
 	attendanceQueueClose(

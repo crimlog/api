@@ -7,6 +7,11 @@ import {
 } from 'apollo-server-core';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { PrismaModule } from '../prisma/prisma.module';
+import { AttendanceQueueModule } from './attendance-queue/attendance-queue.module';
+import { AttendanceRecordModule } from './attendance-record/attendance-record.module';
+import { CourseModule } from './course/course.module';
+import { ProfessorModule } from './professor/professor.module';
+import { StudentModule } from './student/student.module';
 
 @Module({
 	imports: [
@@ -14,7 +19,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 			driver: ApolloDriver,
 			playground: false,
 			plugins: [
-				// Install a landing page plugin based on NODE_ENV
+				// Install a landing page plugin based on Node environment
 				process.env.NODE_ENV === 'production'
 					? ApolloServerPluginLandingPageProductionDefault({
 							footer: false,
@@ -33,6 +38,11 @@ import { PrismaModule } from '../prisma/prisma.module';
 			},
 		}),
 		PrismaModule,
+		StudentModule,
+		ProfessorModule,
+		CourseModule,
+		AttendanceRecordModule,
+		AttendanceQueueModule,
 	],
 })
 export class AppModule {}
