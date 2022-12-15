@@ -19,7 +19,8 @@
 		"format": "yarn rome format .",
 		"format:fix": "yarn rome format . --write",
 		"lint": "yarn rome check .",
-		"lint:fix": "yarn rome check . --apply-suggested"
+		"lint:fix": "yarn rome check . --apply-suggested",
+		"test": "jest"
 	},
 	"dependencies": {
 		"@nestjs/apollo": "10.1.6",
@@ -40,10 +41,14 @@
 		"@graphql-codegen/typescript": "2.8.2",
 		"@nestjs/cli": "9.1.5",
 		"@nestjs/platform-express": "9.2.0",
+		"@nestjs/testing": "9.2.1",
+		"@types/jest": "29.2.4",
 		"@types/node": "16.18.0",
+		"jest": "29.3.1",
 		"prisma": "4.6.1",
 		"rome": "11.0.0",
 		"spectaql": "1.5.9",
+		"ts-jest": "29.0.3",
 		"ts-node": "10.9.1",
 		"typescript": "4.9.3"
 	},
