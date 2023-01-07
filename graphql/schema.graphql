@@ -25,6 +25,8 @@ type Professor {
 	first: String! @spectaql(options: [{ key: "example", value: "Mark" }])
 	"Last name"
 	last: String! @spectaql(options: [{ key: "example", value: "Reha" }])
+	"Wallet address, used for authentication into the queue"
+	walletAddress: String! @spectaql(options: [{ key: "example", value: "0x1234567890abcdef" }])
 }
 
 "A specific university course"
@@ -124,6 +126,12 @@ type Query {
 	# Retrieve all [`AttendanceQueues`]({{Types.AttendanceQueue}}) with a `status` of
 	#activeAttendanceQueues: [AttendanceQueue]!
 	#studentActiveAttendanceQueues(studentId: Int!): [AttendanceQueue]!
+
+	"Retrieve the unsigned nonce for a [`Professor`]({{Types.Professor}})'s wallet address"
+	professorNonce(
+		"Wallet address of the [`Professor`]({{Types.Professor}})"
+		walletAddress: String!
+	): String
 }
 
 type Mutation {
@@ -156,4 +164,12 @@ type Mutation {
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to issue a minting for"
 		queueId: ID!
 	): [AttendanceRecord]
+
+	"Authenticate a [`Professor`]({{Types.Professor}}) through digital signature"
+	professorLogin(
+		"Wallet address of the [`Professor`]({{Types.Professor}})"
+		walletAddress: String!
+		"Signed nonce"
+		signature: String!
+	): Professor
 }

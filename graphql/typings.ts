@@ -90,6 +90,8 @@ export type Mutation = {
   attendanceQueueMint?: Maybe<Array<Maybe<AttendanceRecord>>>;
   /** Remove a [`Student`]({{Types.Student}}) from an existing [`AttendanceQueue`]({{Types.AttendanceQueue}}) */
   attendanceQueueRemoveStudent?: Maybe<AttendanceQueue>;
+  /** Authenticate a [`Professor`]({{Types.Professor}}) through digital signature */
+  professorLogin?: Maybe<Professor>;
 };
 
 
@@ -119,6 +121,12 @@ export type MutationAttendanceQueueRemoveStudentArgs = {
   studentId: Scalars['Int'];
 };
 
+
+export type MutationProfessorLoginArgs = {
+  signature: Scalars['String'];
+  walletAddress: Scalars['String'];
+};
+
 /** A university professor */
 export type Professor = {
   __typename?: 'Professor';
@@ -128,6 +136,8 @@ export type Professor = {
   id: Scalars['ID'];
   /** Last name */
   last: Scalars['String'];
+  /** Wallet address, used for authentication into the queue */
+  walletAddress: Scalars['String'];
 };
 
 export type Query = {
@@ -146,6 +156,8 @@ export type Query = {
   courses: Array<Maybe<Course>>;
   /** Retrieve a single [`Professor`]({{Types.Professor}}) by ID */
   professor?: Maybe<Professor>;
+  /** Retrieve the unsigned nonce for a [`Professor`]({{Types.Professor}})'s wallet address */
+  professorNonce?: Maybe<Scalars['String']>;
   /** Retrieve all [`Professors`]({{Types.Professor}}) */
   professors: Array<Maybe<Professor>>;
   /** Retrieve a single [`Student`]({{Types.Student}}) by ID */
@@ -174,6 +186,11 @@ export type QueryCourseArgs = {
 
 export type QueryProfessorArgs = {
   id: Scalars['Int'];
+};
+
+
+export type QueryProfessorNonceArgs = {
+  walletAddress: Scalars['String'];
 };
 
 

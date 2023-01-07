@@ -26,6 +26,8 @@ model Professor {
     id                String             @id @default(auto()) @map("_id") @db.ObjectId
     first             String
     last              String
+    walletAddress     String             @unique
+    nonce             String
     courses           Course[]
     attendanceRecords AttendanceRecord[]
 }
