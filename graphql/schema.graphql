@@ -6,7 +6,7 @@ scalar Timestamp
 "A university student"
 type Student {
 	"University-specific student ID number"
-	id: Int! @spectaql(options: [{ key: "example", value: 20638761 }])
+	id: Int! @spectaql(options: [{ key: "example", value: "20638761" }])
 	"Student's NFC Card uid"
 	cardId: CardId!
 	"First name"
@@ -130,7 +130,7 @@ type Query {
 	"Retrieve the unsigned nonce for a [`Professor`]({{Types.Professor}})'s wallet address"
 	professorNonce(
 		"Wallet address of the [`Professor`]({{Types.Professor}})"
-		walletAddress: String!
+		walletAddress: String! @spectaql(options: [{ key: "example", value: "0x1234567890abcdef" }])
 	): String
 }
 
@@ -168,8 +168,16 @@ type Mutation {
 	"Authenticate a [`Professor`]({{Types.Professor}}) through digital signature"
 	professorLogin(
 		"Wallet address of the [`Professor`]({{Types.Professor}})"
-		walletAddress: String!
+		walletAddress: String! @spectaql(options: [{ key: "example", value: "0x1234567890abcdef" }])
 		"Signed nonce"
 		signature: String!
+			@spectaql(
+				options: [
+					{
+						key: "example"
+						value: "0xbf15f931a32b5b1fccf062202467de13afe4882aab4c079cf8cba2bdefa023ed6829342901ab5b4bde0a7ed324eb5a85c4b71734a9e9cfa22a9d628b221806701c"
+					}
+				]
+			)
 	): Professor
 }
