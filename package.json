@@ -23,6 +23,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"@metamask/eth-sig-util": "5.0.2",
 		"@nestjs/apollo": "10.1.6",
 		"@nestjs/common": "9.2.0",
 		"@nestjs/core": "9.2.0",
