@@ -90,8 +90,8 @@ export type Mutation = {
   attendanceQueueMint?: Maybe<Array<Maybe<AttendanceRecord>>>;
   /** Remove a [`Student`]({{Types.Student}}) from an existing [`AttendanceQueue`]({{Types.AttendanceQueue}}) */
   attendanceQueueRemoveStudent?: Maybe<AttendanceQueue>;
-  /** Authenticate a [`Professor`]({{Types.Professor}}) through digital signature */
-  professorLogin?: Maybe<Professor>;
+  /** Authenticate a [`Professor`]({{Types.Professor}}) through digital signature and receive a JWT response */
+  professorLogin?: Maybe<Scalars['String']>;
 };
 
 
@@ -158,6 +158,8 @@ export type Query = {
   professor?: Maybe<Professor>;
   /** Retrieve the unsigned nonce for a [`Professor`]({{Types.Professor}})'s wallet address */
   professorNonce?: Maybe<Scalars['String']>;
+  /** Retrieve the currently signed in [`Professor`]({{Types.Professor}}) via the `Authorization` header */
+  professorSelf?: Maybe<Professor>;
   /** Retrieve all [`Professors`]({{Types.Professor}}) */
   professors: Array<Maybe<Professor>>;
   /** Retrieve a single [`Student`]({{Types.Student}}) by ID */
