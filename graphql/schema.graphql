@@ -132,6 +132,9 @@ type Query {
 		"Wallet address of the [`Professor`]({{Types.Professor}})"
 		walletAddress: String! @spectaql(options: [{ key: "example", value: "0x1234567890abcdef" }])
 	): String
+
+	"Retrieve the currently signed in [`Professor`]({{Types.Professor}}) via the `Authorization` header"
+	professorSelf: Professor
 }
 
 type Mutation {
@@ -165,7 +168,7 @@ type Mutation {
 		queueId: ID!
 	): [AttendanceRecord]
 
-	"Authenticate a [`Professor`]({{Types.Professor}}) through digital signature"
+	"Authenticate a [`Professor`]({{Types.Professor}}) through digital signature and receive a JWT response"
 	professorLogin(
 		"Wallet address of the [`Professor`]({{Types.Professor}})"
 		walletAddress: String! @spectaql(options: [{ key: "example", value: "0x1234567890abcdef" }])
@@ -179,5 +182,5 @@ type Mutation {
 					}
 				]
 			)
-	): Professor
+	): String
 }

@@ -1,11 +1,12 @@
 import { recoverPersonalSignature } from '@metamask/eth-sig-util';
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { randomUUID } from 'node:crypto';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class AuthService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService) {}
 
 	async professorNonce(walletAddress: string) {
 		// there should be no situation where a Professor doc does not have a nonce
@@ -39,6 +40,6 @@ export class AuthService {
 			data: { nonce: randomUUID() },
 		});
 
-		return professor;
+		return this.jwtService.sign({ id: professor.id, walletAddress });
 	}
 }
