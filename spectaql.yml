@@ -1,3 +1,7 @@
+spectaql:
+    logoFile: ./assets/logo.png
+    faviconFile: ./assets/favicon.png
+
 info:
     title: CrimLog Internal GraphQL API Reference
     description: Full documentation of the CrimLog internal GraphQL API schema
@@ -8,6 +12,6 @@ introspection:
         enable: true
 
 servers:
-    - url: https://example.com/graphql
+    - url: https://api.crimlog.org/graphql
       description: Currently unimplemented
-      production: false
+      production: true

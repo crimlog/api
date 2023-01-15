@@ -23,16 +23,20 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"@metamask/eth-sig-util": "5.0.2",
 		"@nestjs/apollo": "10.1.6",
 		"@nestjs/common": "9.2.0",
 		"@nestjs/core": "9.2.0",
 		"@nestjs/graphql": "10.1.6",
+		"@nestjs/jwt": "10.0.1",
 		"@nestjs/mapped-types": "1.2.0",
+		"@nestjs/passport": "9.0.0",
 		"@prisma/client": "4.6.1",
 		"apollo-server-core": "3.11.1",
 		"apollo-server-express": "3.11.1",
 		"graphql": "16.6.0",
 		"graphql-parse-resolve-info": "4.12.3",
+		"passport-jwt": "4.0.1",
 		"reflect-metadata": "0.1.13",
 		"rxjs": "7.5.7"
 	},
@@ -47,7 +51,7 @@
 		"jest": "29.3.1",
 		"prisma": "4.6.1",
 		"rome": "11.0.0",
-		"spectaql": "1.5.9",
+		"spectaql": "2.0.3",
 		"ts-jest": "29.0.3",
 		"ts-node": "10.9.1",
 		"typescript": "4.9.3"

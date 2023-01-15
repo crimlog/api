@@ -7,6 +7,7 @@ import {
 	Professor,
 	Student,
 } from '@prisma/client';
+import { randomUUID } from 'node:crypto';
 const prisma = new PrismaClient();
 
 const _student: Student = {
@@ -24,6 +25,8 @@ const _professor: Professor = {
 	id: '636fe6844498e9db2cf95606',
 	first: 'Mark',
 	last: 'Reha',
+	walletAddress: '0x123457',
+	nonce: randomUUID(),
 };
 
 const _course: Course = {
