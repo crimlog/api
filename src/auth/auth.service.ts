@@ -13,7 +13,7 @@ export class AuthService {
 		// initial nonces should be generated and inserted on doc creation
 		return (
 			await this.prisma.professor.findFirstOrThrow({
-				where: { walletAddress },
+				where: { walletAddress: { equals: walletAddress, mode: 'insensitive' } },
 			})
 		)?.nonce;
 	}
@@ -21,7 +21,7 @@ export class AuthService {
 	async professorLogin(walletAddress: string, signature: string) {
 		// fetch the Professor doc, throw if DNE
 		const professor = await this.prisma.professor.findFirstOrThrow({
-			where: { walletAddress },
+			where: { walletAddress: { equals: walletAddress, mode: 'insensitive' } },
 		});
 
 		// extract signer address from signature
@@ -36,7 +36,7 @@ export class AuthService {
 
 		// regenerate nonce
 		await this.prisma.professor.update({
-			where: { walletAddress },
+			where: { walletAddress: professor.walletAddress },
 			data: { nonce: randomUUID() },
 		});
 
