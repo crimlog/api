@@ -1,7 +1,7 @@
 "The unique identifier for the student's NFC card"
 scalar CardId @spectaql(options: [{ key: "example", value: "04:87:67:21:39:61:80" }])
-"Time (in milliseconds) since the UNIX Epoch"
 scalar Timestamp
+scalar ObjectID
 
 "A university student"
 type Student {
@@ -20,7 +20,7 @@ type Student {
 "A university professor"
 type Professor {
 	"University-specific professor ID number"
-	id: ID! @spectaql(options: [{ key: "example", value: "636fe6844498e9db2cf95606" }])
+	id: ObjectID! @spectaql(options: [{ key: "example", value: "636fe6844498e9db2cf95606" }])
 	"First name"
 	first: String! @spectaql(options: [{ key: "example", value: "Mark" }])
 	"Last name"
@@ -32,7 +32,7 @@ type Professor {
 "A specific university course"
 type Course {
 	"Database ID of the course"
-	id: ID!
+	id: ObjectID!
 	"The course code"
 	code: String! @spectaql(options: [{ key: "example", value: "CST-451" }])
 	"The course name"
@@ -47,7 +47,7 @@ type Course {
 
 "Represents the blockchain transaction of a student attendance record"
 type AttendanceRecord {
-	id: ID!
+	id: ObjectID!
 	student: Student!
 	professor: Professor!
 	course: Course!
@@ -72,7 +72,7 @@ enum AttendanceQueueStatus {
 "A digital queue that contains [`Students`]({{Types.Student}}). Batch operations can be performed on the queue, such as minting [`AttendanceRecords`]({{Types.AttendanceRecord}}) for all students in the queue."
 type AttendanceQueue {
 	"Unique ID of the queue"
-	id: ID!
+	id: ObjectID!
 	status: AttendanceQueueStatus!
 	"A list of [`Students`]({{Types.Student}}) currently in the queue"
 	students: [Student!]!
@@ -85,7 +85,7 @@ type AttendanceQueue {
 "Input necessary for creating a new [`AttendanceQueue`]({{Types.AttendanceQueue}})"
 input AttendanceQueueInput {
 	"[`Course.id`]({{Types.Course}})"
-	courseId: ID!
+	courseId: ObjectID!
 }
 
 type Query {
@@ -94,24 +94,24 @@ type Query {
 	"Retrieve all [`Students`]({{Types.Student}})"
 	students: [Student]!
 	"Retrieve a single [`Professor`]({{Types.Professor}}) by ID"
-	professor("ID of the [`Professor`]({{Types.Professor}}) to retrieve" id: Int!): Professor
+	professor("ID of the [`Professor`]({{Types.Professor}}) to retrieve" id: ObjectID!): Professor
 	"Retrieve all [`Professors`]({{Types.Professor}})"
 	professors: [Professor]!
 	"Retrieve a single [`Course`]({{Types.Course}}) by ID"
-	course("ID of the [`Course`]({{Types.Course}}) to retrieve" id: Int!): Course
+	course("ID of the [`Course`]({{Types.Course}}) to retrieve" id: ObjectID!): Course
 	"Retrieve all [`Courses`]({{Types.Course}})"
 	courses: [Course]!
 	"Retrieve a single [`AttendanceRecord`]({{Types.AttendanceRecord}}) by ID"
 	attendanceRecord(
 		"ID of the [`AttendanceRecord`]({{Types.AttendanceRecord}}) to retrieve"
-		id: Int!
+		id: ObjectID!
 	): AttendanceRecord
 	"Retrieve all [`AttendanceRecords`]({{Types.AttendanceRecord}})"
 	attendanceRecords: [AttendanceRecord]!
 	"Retrieve a single [`AttendanceQueue`]({{Types.AttendanceQueue}}) by ID"
 	attendanceQueue(
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to retrieve"
-		id: Int!
+		id: ObjectID!
 	): AttendanceQueue
 	"Retrieve all [`AttendanceQueues`]({{Types.AttendanceQueue}})"
 	attendanceQueues: [AttendanceQueue]!
@@ -146,26 +146,26 @@ type Mutation {
 	"Add a [`Student`]({{Types.Student}}) to an existing [`AttendanceQueue`]({{Types.AttendanceQueue}})"
 	attendanceQueueAddStudent(
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to add the student to"
-		queueId: ID!
+		queueId: ObjectID!
 		"ID of the [`Student`]({{Types.Student}}) to add to the queue"
 		studentId: Int!
 	): AttendanceQueue
 	"Remove a [`Student`]({{Types.Student}}) from an existing [`AttendanceQueue`]({{Types.AttendanceQueue}})"
 	attendanceQueueRemoveStudent(
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to remove the student from"
-		queueId: ID!
+		queueId: ObjectID!
 		"ID of the [`Student`]({{Types.Student}}) to remove from the queue"
 		studentId: Int!
 	): AttendanceQueue
 	"Manually close an [`AttendanceQueue`]({{Types.AttendanceQueue}})"
 	attendanceQueueClose(
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to close"
-		queueId: ID!
+		queueId: ObjectID!
 	): AttendanceQueue
 	"Mint an [`AttendanceRecord`]({{Types.AttendanceRecord}}) for all [`Students`]({{Types.Student}}) in an [`AttendanceQueue`]({{Types.AttendanceQueue}}), automatically closing the queue afterewards"
 	attendanceQueueMint(
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to issue a minting for"
-		queueId: ID!
+		queueId: ObjectID!
 	): [AttendanceRecord]
 
 	"Authenticate a [`Professor`]({{Types.Professor}}) through digital signature and receive a JWT response"
