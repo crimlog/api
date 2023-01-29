@@ -1,11 +1,14 @@
 import { AttendanceRecord } from '@prisma/client';
+import { courseSeed } from './course';
+import { professorSeed } from './professor';
+import { studentSeed } from './student';
 
 export const attendanceRecordSeed: AttendanceRecord[] = [
 	{
 		id: '636fe6844498e9db2cf95607',
-		studentId: 12345678,
-		professorId: '636fe6844498e9db2cf95606',
-		courseId: '636fe6844498e9db2cf95605',
+		studentId: studentSeed[0].id,
+		professorId: professorSeed[0].id,
+		courseId: courseSeed[0].id,
 		timestamp: Date.now(),
 		imageURL: 'https://www.example.com/image.png',
 	},

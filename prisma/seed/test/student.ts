@@ -7,7 +7,7 @@ export const studentSeed: Student[] = [
 		first: 'Melanie',
 		last: 'Spence',
 		walletAddress: '0x123456',
-		courseIds: [],
+		courseIds: ['636fe6844498e9db2cf95605'],
 		honorsCourseIds: [],
 		attendanceQueueIds: [],
 	},

@@ -40,22 +40,6 @@ export async function seedTest() {
 			console.timeEnd(method);
 		}
 
-		// Establish relationships
-		console.log(
-			`Enrolling student ${studentSeed[0].first} ${studentSeed[0].last} in course ${courseSeed[0].code} ${courseSeed[0].name}...`,
-		);
-		await prisma.course.update({
-			where: { id: courseSeed[0].id },
-			data: {
-				students: {
-					connect: [{ id: studentSeed[0].id }],
-				},
-			},
-		});
-		console.log(
-			`Student ${studentSeed[0].first} ${studentSeed[0].last} enrolled in course ${courseSeed[0].code} ${courseSeed[0].name}`,
-		);
-
 		console.timeEnd('Prisma Seed (Test data)');
 	} catch (e) {
 		console.error(e);

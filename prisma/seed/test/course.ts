@@ -6,7 +6,7 @@ export const courseSeed: Course[] = [
 		code: 'CST-451',
 		name: 'Senior Capstone I',
 		professorId: '636fe6844498e9db2cf95606',
-		studentIds: [],
+		studentIds: [12345678],
 		honorsStudentIds: [],
 	},
 ];

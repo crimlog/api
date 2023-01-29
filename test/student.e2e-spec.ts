@@ -28,7 +28,7 @@ describe('Student', () => {
 		// Act
 		const res = await api.req<{ students: Student[] }>(gql`
             query {
-            students {
+                students {
                     id
                     cardId
                     first
@@ -54,7 +54,7 @@ describe('Student', () => {
 		// Act
 		const res = await api.req<{ student: Student }>(gql`
             query {
-            student(id: ${studentSeed[0].id}) {
+                student(id: ${studentSeed[0].id}) {
                     id
                     cardId
                     first
@@ -79,7 +79,7 @@ describe('Student', () => {
 		// Act
 		const res = await api.req<{ student: Student }>(gql`
             query {
-            student(id: 999) {
+                student(id: 999) {
                     id
                     cardId
                     first
