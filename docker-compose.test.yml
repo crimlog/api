@@ -12,6 +12,7 @@ services:
             MONGODB_REPLICA_SET_KEY: testdb
         ports:
             - 27017:27017
+        # A document needs to be inserted into the database for it to be created
         volumes:
             - ./test/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
         tmpfs: /data/db
