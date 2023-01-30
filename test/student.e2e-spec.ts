@@ -95,4 +95,53 @@ describe('Student', () => {
 		const { student } = res;
 		expect(student).toBeNull();
 	});
+
+	test('when an existing Student is queried by CardId, then it should return it', async () => {
+		// Arrange
+		// arrangement done in seed
+
+		// Act
+		const res = await api.req<{ studentByCardId: Student }>(gql`
+            query {
+                studentByCardId(cardId: "${studentSeed[0].cardId}") {
+                    id
+                    cardId
+                    first
+                    last
+                    walletAddress
+                }
+            }
+        `);
+
+		// Assert
+		expect(res).toBeDefined();
+
+		const { studentByCardId } = res;
+		expect(studentByCardId).toBeDefined();
+		expect(studentByCardId).toMatchObject(studentSeed.find(({ id }) => id === studentSeed[0].id));
+	});
+
+	test('when an non-existent Student is queried by CardId, then it should return null', async () => {
+		// Arrange
+		// arrangement done in seed
+
+		// Act
+		const res = await api.req<{ studentByCardId: Student }>(gql`
+            query {
+                studentByCardId(cardId: "99:99:99:99:99:99:99") {
+                    id
+                    cardId
+                    first
+                    last
+                    walletAddress
+                }
+            }
+        `);
+
+		// Assert
+		expect(res).toBeDefined();
+
+		const { studentByCardId } = res;
+		expect(studentByCardId).toBeNull();
+	});
 });

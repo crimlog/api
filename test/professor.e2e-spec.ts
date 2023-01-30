@@ -1,4 +1,5 @@
-import { gql } from 'graphql-request';
+import { personalSign } from '@metamask/eth-sig-util';
+import { ClientError, gql } from 'graphql-request';
 import { Professor } from '../graphql/typings';
 import { professorSeed as _professorSeed } from '../prisma/seed/test';
 import { _afterAll, _beforeAll } from './hooks';
@@ -89,5 +90,85 @@ describe('Professor', () => {
 
 		const { professor } = res;
 		expect(professor).toBeNull();
+	});
+
+	describe('Professor authentication flow', () => {
+		test("when an existing Professor's nonce is queried, then it should return it", async () => {
+			// Arrange
+			// arrangement done in seed
+
+			// Act
+			const res = await api.req<{ professorNonce: String }>(gql`
+				query {
+					professorNonce(walletAddress: "${professorSeed[0].walletAddress}") 
+				}
+			`);
+
+			// Assert
+			expect(res).toBeDefined();
+
+			const { professorNonce } = res;
+			expect(professorNonce).toBeDefined();
+			expect(typeof professorNonce).toBe('string');
+		});
+
+		test("when an non-existent Professor's nonce is queried, then it should return an error", async () => {
+			// Arrange
+			// arrangement done in seed
+
+			// Act
+			const res: ClientError = await api.req(gql`
+				query {
+					professorNonce(walletAddress: "0x999999") 
+				}
+			`);
+
+			// Assert
+			expect(res).toBeDefined();
+
+			const { message } = res;
+			expect(message.includes('No Professor found')).toBeTruthy();
+		});
+
+		test('when a Professor is logged in with a signed nonce, then it should return a JWT', async () => {
+			// Arrange
+			const { professorNonce: nonce } = await api.req<{ professorNonce: String }>(gql`
+				query {
+					professorNonce(walletAddress: "${professorSeed[0].walletAddress}") 
+				}
+			`);
+
+			const signature = personalSign({
+				privateKey: Buffer.from(
+					'e400bc593b81c40dc8d8ad1723e2fe2ea69542a782a0344c35ed18a14cc3d1bb',
+					'hex',
+				),
+				data: `Sign message to login to CrimLog: ${nonce}`,
+			});
+
+			// Act
+			const res = await api.req<{ professorLogin: String }>(gql`
+				mutation {
+					professorLogin(walletAddress: "${professorSeed[0].walletAddress}", signature: "${signature}") 
+				}
+			`);
+
+			// Assert
+			expect(res).toBeDefined();
+
+			const { professorLogin } = res;
+			expect(professorLogin).toBeDefined();
+			expect(professorLogin).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/); // https://www.regextester.com/105777
+		});
+
+		test.todo(
+			'when a Professor is logged in with an invalid nonce, then it should return an error',
+		);
+
+		test.todo('when a Professor is successfully logged in, then it should change the nonce');
+
+		test.todo(
+			'when a Professor is authenticated, then it should be able to retrieve its own information',
+		);
 	});
 });
