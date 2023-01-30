@@ -9,7 +9,7 @@ export const attendanceRecordSeed: AttendanceRecord[] = [
 		studentId: studentSeed[0].id,
 		professorId: professorSeed[0].id,
 		courseId: courseSeed[0].id,
-		timestamp: Date.now(),
+		timestamp: 1675045509506,
 		imageURL: 'https://www.example.com/image.png',
 	},
 ];
