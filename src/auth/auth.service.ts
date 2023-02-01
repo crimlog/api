@@ -29,7 +29,6 @@ export class AuthService {
 			signature,
 			data: `Sign message to login to CrimLog: ${professor.nonce}`,
 		});
-		console.log('signerAddress', signerAddress);
 
 		if (signerAddress.toLowerCase() !== walletAddress.toLowerCase())
 			throw new Error('Invalid signature');

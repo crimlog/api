@@ -37,6 +37,7 @@
 		"apollo-server-express": "3.11.1",
 		"graphql": "16.6.0",
 		"graphql-parse-resolve-info": "4.12.3",
+		"graphql-scalars": "1.20.1",
 		"passport-jwt": "4.0.1",
 		"reflect-metadata": "0.1.13",
 		"rxjs": "7.5.7"
@@ -61,6 +62,6 @@
 		"typescript": "4.9.3"
 	},
 	"prisma": {
-		"seed": "node -r ts-node/register prisma/seed.ts"
+		"seed": "node -r ts-node/register prisma/test.seed.ts --execute"
 	}
 }

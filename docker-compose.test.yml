@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+    test_db:
+        container_name: crimlog_test_db
+        image: bitnami/mongodb:latest
+        environment:
+            MONGODB_ADVERTISED_HOSTNAME: 127.0.0.1
+            MONGODB_REPLICA_SET_MODE: primary
+            MONGODB_ROOT_USER: root
+            MONGODB_ROOT_PASSWORD: root
+            MONGODB_DATABASE: test
+            MONGODB_REPLICA_SET_KEY: testdb
+        ports:
+            - 27017:27017
+        # A document needs to be inserted into the database for it to be created
+        volumes:
+            - ./test/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+        tmpfs: /data/db

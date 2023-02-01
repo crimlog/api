@@ -23,6 +23,7 @@ specifiers:
   graphql: 16.6.0
   graphql-parse-resolve-info: 4.12.3
   graphql-request: 5.1.0
+  graphql-scalars: 1.20.1
   jest: 29.3.1
   passport-jwt: 4.0.1
   prisma: 4.6.1
@@ -49,6 +50,7 @@ dependencies:
   apollo-server-express: 3.11.1_5ha345eiak62qiwwva5z4dp6gu
   graphql: 16.6.0
   graphql-parse-resolve-info: 4.12.3_graphql@16.6.0
+  graphql-scalars: 1.20.1_graphql@16.6.0
   passport-jwt: 4.0.1
   reflect-metadata: 0.1.13
   rxjs: 7.5.7
@@ -4968,7 +4970,6 @@ packages:
     dependencies:
       graphql: 16.6.0
       tslib: 2.4.1
-    dev: true
 
   /graphql-tag/2.12.6_graphql@16.6.0:
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}

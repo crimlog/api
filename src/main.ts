@@ -1,9 +1,4 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-const PORT = process.env.PORT || 3000;
+// This entire file is executed in a node environment by Nest.js when `nest start` is run.
+import { initializeApp } from './app';
 
-(async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
-
-	await app.listen(PORT);
-})();
+initializeApp();
