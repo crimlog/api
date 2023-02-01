@@ -38,7 +38,7 @@ CrimLog makes use of several code generation tools to improve the development ex
 
 [Prisma](https://prisma.io/), an ORM, provides complete and thorough TypeScript types for all database models and queries. The `schema.prisma` file is the single source of truth for these types.
 
-Whenever the `schema.prisma` is updated, the `prisma:generate` script will need to be run to regenerate the Prisma types. Alternativel, `prisma:generate:w` can be run once to continuously watch the Prisma schema file and regenerate types automatically on save. Run this command to autogenerate the entire Prisma client into your `node_modules/` folder (necessary before proceeding to the [Database](#database) section):
+Whenever the `schema.prisma` is updated, the `prisma:generate` script will need to be run to regenerate the Prisma types. Alternatively, `prisma:generate:w` can be run once to continuously watch the Prisma schema file and regenerate types automatically on save. Run this command to autogenerate the entire Prisma client into your `node_modules/` folder (necessary before proceeding to the [Database](#database) section):
 
 ```cmd
 pnpm prisma:generate
@@ -69,7 +69,7 @@ pnpm prisma:seed
 
 ## Nest.js API
 
-[Nest.js](http://nestjs.com/) has a CLI that is used for compiling the source files into the local `dist/` folder. To compile the API in a development envrionment, run the command:
+[Nest.js](http://nestjs.com/) has a CLI that is used for compiling the source files into the local `dist/` folder. To compile the API in a development environment, run the command:
 
 ```cmd
 pnpm start:dev
@@ -98,7 +98,7 @@ When practical, we try to follow the [Shopify Official GraphQL Design Guidelines
 
 ## Integration Testing
 
-Integration (e2e) testing was designed in accordance with the principles established by [nodejs-integration-tests-best-practices](https://github.com/testjavascript/nodejs-integration-tests-best-practices). A GitHub workflow is ran on all pull requests into `dev` that executes the integration test suites defined in the `test/` directory.
+Integration (e2e) testing was designed in accordance with the principles established by [nodejs-integration-tests-best-practices](https://github.com/testjavascript/nodejs-integration-tests-best-practices). A GitHub workflow is run on all pull requests into `dev` that executes the integration test suites defined in the `test/` directory.
 
 ### Creating an Integration Test
 
@@ -167,7 +167,7 @@ Replace the text surrounded by curly braces as appropriate. The body of each tes
 
 [Rome](https://rome.tools/) is the project's linting & formatting tool of choice. It includes several defaults out of the box, which generally serve to improve the developer experience by eliminating compelx configurations and the perpetual debates that often surround specific rules. Its configuration is defined in the root-level [`rome.json`](https://github.com/crimlog/api/blob/dev/rome.json) file.
 
-Another benefit of Rome's lack of configuration options (when comared to alternatives such as [ESLint](https://eslint.org/) or [JSLint](https://www.jslint.com/)) is the "freedom" it can offer developers, even on teams, in making some personal coding style decisions. The Crimlog development team is currently small enough to where a slight degree of flexibility like this can end up making software development a more pleasant process. There is no arbitrary linter established by some senior developer 10 years ago that harasses you for every other line of code that you write. Instead, there's a lightweight, minimal linter that provides occasional suggestions for the purpose of enforcing a high-level coding standard, while still allowing you the freedom to code how you prefer and are used to. The humanity of developers can often be overlooked in work environments, and Crimlog aims to preserve the importance of human idiosyncrasy as much as possible.
+Another benefit of Rome's lack of configuration options (when compared to alternatives such as [ESLint](https://eslint.org/) or [JSLint](https://www.jslint.com/)) is the "freedom" it can offer developers, even on teams, in making some personal coding style decisions. The Crimlog development team is currently small enough to where a slight degree of flexibility like this can end up making software development a more pleasant process. There is no arbitrary linter established by some senior developer 10 years ago that harasses you for every other line of code that you write. Instead, there's a lightweight, minimal linter that provides occasional suggestions for the purpose of enforcing a high-level coding standard, while still allowing you the freedom to code how you prefer and are used to. The humanity of developers can often be overlooked in work environments, and Crimlog aims to preserve the importance of human idiosyncrasy as much as possible.
 
 Although linting can be performed entirely through the CLI, installing the [Rome IDE extension](#rome-vs-code-extension) is recommended for convenience. Linting via CLI is managed through npm scripts. `pnpm lint` will output detected issues, and `pnpm lint:fix` will automatically resolve them (when possible).
 
@@ -175,7 +175,7 @@ Although linting can be performed entirely through the CLI, installing the [Rome
 
 ### [complexity.noExtraBooleanCast](https://docs.rome.tools/lint/rules/noextrabooleancast/)
 
-Although many uses of the double-bang operator (`!!`) are critized for unnecessary complexity, those attacks often end up being overstatements. The double-bang operator, when used appropriately, provides immediately knowledge to the developer viewing it that the subject value is not a boolean.
+Although many uses of the double-bang operator (`!!`) are criticized for unnecessary complexity, those attacks often end up being overstatements. The double-bang operator, when used appropriately, provides immediately knowledge to the developer viewing it that the subject value is not a boolean.
 
 JavaScript type coercion, while a beautiful feature, is frequently abused. For example:
 
