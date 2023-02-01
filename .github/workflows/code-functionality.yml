@@ -24,6 +24,9 @@ jobs:
             - name: Install Dependencies
               run: pnpm i --frozen-lockfile
 
+            - name: Autogenerate files
+              run: pnpm graphql-codegen # prisma client is generated w prisma db push
+
             - name: Run Integration Tests
               env:
                   NODE_OPTIONS: '--max_old_space_size=4096' # prevent out of memory errors (https://github.com/actions/runner-images/issues/70#issuecomment-1191708172)
