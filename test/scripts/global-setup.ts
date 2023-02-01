@@ -18,7 +18,7 @@ export default async function globalSetup() {
 		console.log(dockerRes.toString()); //send output to console
 
 		// wait some time to ensure db is accessible by prisma
-		await new Promise((resolve) => setTimeout(resolve, 2000));
+		await new Promise((resolve) => setTimeout(resolve, 5000));
 
 		// push prisma schema to db
 		const prismaRes = execSync('npx prisma db push --skip-generate');
