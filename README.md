@@ -98,7 +98,7 @@ When practical, we try to follow the [Shopify Official GraphQL Design Guidelines
 
 ## Integration Testing
 
-Integration (e2e) testing was designed in accordance with the principles established by [nodejs-integration-tests-best-practices](https://github.com/testjavascript/nodejs-integration-tests-best-practices). A GitHub workflow is ran on all pull requests into `development` that executes the integration test suites defined in the `test/` directory.
+Integration (e2e) testing was designed in accordance with the principles established by [nodejs-integration-tests-best-practices](https://github.com/testjavascript/nodejs-integration-tests-best-practices). A GitHub workflow is ran on all pull requests into `dev` that executes the integration test suites defined in the `test/` directory.
 
 ### Creating an Integration Test
 
