@@ -13,7 +13,7 @@ The CrimLog API is the backbone of the CrimLog protocol. It is a [GraphQL](https
 
 ## Install Dependencies
 
-This is a [pnpm](https://pnpm.io/) project, and the usage of other package managers such as npm or pnpm is strongly discouraged. After installing Node.js, pnpm can be enabled using the built-in [Corepack](https://nodejs.org/api/corepack.html) API. Run the following commands to setup pnpm on your system:
+This is a [pnpm](https://pnpm.io/) project, and the usage of other package managers such as npm or yarn is strongly discouraged. After installing Node.js, pnpm can be enabled using the built-in [Corepack](https://nodejs.org/api/corepack.html) API. Run the following commands to setup pnpm on your system:
 
 ```cmd
 corepack enable
