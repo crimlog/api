@@ -1,9 +1,8 @@
 import { gql } from 'graphql-request';
 import { AttendanceQueue, AttendanceQueueInput } from '../graphql/typings';
 import { courseSeed } from '../prisma/seed/test';
-import { seedTest } from '../prisma/test.seed';
 import { _afterAll, _beforeAll } from './hooks';
-import { GraphQLClient, resetDb } from './util';
+import { GraphQLClient } from './util';
 
 let api: GraphQLClient;
 
@@ -15,12 +14,6 @@ beforeAll(async () => {
 afterAll(async () => {
 	// use common afterAll code
 	await _afterAll();
-});
-
-afterEach(async () => {
-	// Reset database
-	await resetDb();
-	await seedTest();
 });
 
 describe('AttendanceQueue', () => {
@@ -80,7 +73,7 @@ describe('AttendanceQueue', () => {
 	test('when an existing AttendanceQueue is queried, then it should return it', async () => {
 		// Arrange
 		// Create an AttendanceQueue
-		const attendanceQueueData: AttendanceQueueInput = { courseId: courseSeed[0].id };
+		const attendanceQueueData: AttendanceQueueInput = { courseId: courseSeed[1].id };
 		const { attendanceQueueCreate } = await api.req<{ attendanceQueueCreate: AttendanceQueue }>(
 			gql`
 				mutation {
