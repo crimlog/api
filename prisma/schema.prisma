@@ -9,7 +9,7 @@ datasource db {
 
 model Student {
     id                 Int                @id @map("_id")
-    cardId             String             @unique
+    cardId             String             @@unique
     first              String
     last               String
     walletAddress      String             @unique
