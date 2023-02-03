@@ -1,0 +1,19 @@
+name: Prisma Schema Validation
+on:
+    pull_request:
+        paths: ['**/schema.prisma']
+
+jobs:
+    validate:
+        name: Validate prisma.schema
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            # Prisma validation fails if it cannot load env vars
+            - name: Create dummy .env file
+              run: echo "DATABASE_URL=mongodb://mongo:password@localhost" > .env
+
+            - name: Run schema validator
+              uses: elijaholmos/prisma-schema-validate@v1
