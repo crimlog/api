@@ -38,7 +38,7 @@ CrimLog makes use of several code generation tools to improve the development ex
 
 [Prisma](https://prisma.io/), an ORM, provides complete and thorough TypeScript types for all database models and queries. The `schema.prisma` file is the single source of truth for these types.
 
-Whenever the `schema.prisma` is updated, the `prisma:generate` script will need to be run to regenerate the Prisma types. Alternativel, `prisma:generate:w` can be run once to continuously watch the Prisma schema file and regenerate types automatically on save. Run this command to autogenerate the entire Prisma client into your `node_modules/` folder (necessary before proceeding to the [Database](#database) section):
+Whenever the `schema.prisma` is updated, the `prisma:generate` script will need to be run to regenerate the Prisma types. Alternatively, `prisma:generate:w` can be run once to continuously watch the Prisma schema file and regenerate types automatically on save. Run this command to autogenerate the entire Prisma client into your `node_modules/` folder (necessary before proceeding to the [Database](#database) section):
 
 ```cmd
 pnpm prisma:generate
@@ -69,7 +69,7 @@ pnpm prisma:seed
 
 ## Nest.js API
 
-[Nest.js](http://nestjs.com/) has a CLI that is used for compiling the source files into the local `dist/` folder. To compile the API in a development envrionment, run the command:
+[Nest.js](http://nestjs.com/) has a CLI that is used for compiling the source files into the local `dist/` folder. To compile the API in a development environment, run the command:
 
 ```cmd
 pnpm start:dev
@@ -80,3 +80,157 @@ Once you see the console should output successful startup messages, you should b
 This command also places the API in watch mode- any changes made to TS files will automatically be recompiled and redeployed by Nest.
 
 **At this point, the project should be setup and ready for local development.**
+
+# GraphQL Schema
+
+## Fundamental Principles
+
+When practical, we try to follow the [Shopify Official GraphQL Design Guidelines](https://github.com/Shopify/graphql-design-tutorial/blob/master/TUTORIAL.md#tldr-the-rules). Some rules we consider to be of particular importance are:
+
+-   Rule [#18](https://github.com/Shopify/graphql-design-tutorial/blob/master/TUTORIAL.md#input-scalars): _Only make input fields required if they're actually semantically required for the mutation to proceed._
+-   Rule [#21](https://github.com/Shopify/graphql-design-tutorial/blob/master/TUTORIAL.md#input-structure-part-2): _Structure mutation inputs to reduce duplication, even if this requires relaxing requiredness constraints on certain fields._
+-   Rule [#17](https://github.com/Shopify/graphql-design-tutorial/blob/master/TUTORIAL.md?rgh-link-date=2022-08-22T15%3A57%3A10Z#input-structure-part-1): _Prefix mutation names with the object they are mutating for alphabetical grouping (e.g. use orderCancel instead of cancelOrder)._
+-   Rule [#14](https://github.com/Shopify/graphql-design-tutorial/blob/master/TUTORIAL.md#separate-logical-actions): _Write separate mutations for separate logical actions on a resource._
+-   Rule [#8](https://github.com/Shopify/graphql-design-tutorial/blob/master/TUTORIAL.md#ids-and-relations): _Always use object references instead of ID fields._
+    -   Exception: mutation inputs
+
+# Code Functionality
+
+## Integration Testing
+
+Integration (e2e) testing was designed in accordance with the principles established by [nodejs-integration-tests-best-practices](https://github.com/testjavascript/nodejs-integration-tests-best-practices). A GitHub workflow is run on all pull requests into `dev` that executes the integration test suites defined in the `test/` directory.
+
+### Creating an Integration Test
+
+The boilerplate for an integration test file is fairly minimal, and looking at simple active examples (such as `course.e2e-spec.ts`) would serve as a good referenece.
+
+To begin, create a file with the name `{entity}.e2e-spec.ts`, where `{entity}` is the name of the entity that will be tested in this file. After the file is created, basic boilerplate content can be inserted:
+
+```ts
+import { _afterAll, _beforeAll } from './hooks';
+import { GraphQLClient } from './util';
+
+let api: GraphQLClient;
+
+beforeAll(async () => {
+	// use common beforeAll code
+	({ api } = await _beforeAll());
+});
+
+afterAll(async () => {
+	// use common afterAll code
+	await _afterAll();
+});
+
+describe('{Entity Name}', () => {
+	test('{when x, then y}', async () => {
+		// Arrange
+		// create data necessary for the test
+		// Act
+		// call the GQL api
+		// Assert
+		// use expect() statements
+	});
+});
+```
+
+Replace the text surrounded by curly braces as appropriate. The body of each test should follow the anatomy of AAA- Arrange, Act, Assert. Again, a good way to develop an understanding of the current integration testing process is to check a recently updated `.e2e-spec.ts` file for examples.
+
+### Integration Test Setup Flow
+
+-   `pnpm test:e2e` command is run
+-   A docker container based off a Mongo replica image is created via docker compose
+    -   a completely empty postgres database is created and its port exposed
+    -   This container is designed to persist in between test runs and is **not** terminated when a test run completes
+    -   A dummy document is inserted into the `test` database to ensure it persists after the initial db creation
+-   From the developer's local system, the Prisma CLI is used (via npm) to structure the db schema
+    -   The command `npx prisma db push` is executed ([ref](https://www.prisma.io/docs/reference/api-reference/command-reference#db-push))
+        -   the entire Prisma schema will be pushed onto the empty mongo database
+-   From the developer's local system, the command [`prisma db seed`](https://www.prisma.io/docs/reference/api-reference/command-reference#db-seed) is executed and initial seed data is loaded into the containerized test database
+    -   This seed only contains meta/necessary data, such as Courses, Professors, etc
+-   Each test suite begins executing (see below)
+
+### Integration Test Suite Execution Flow
+
+-   After setup has completed, each test suite is executed by Jest
+    -   Test suites are defined in the `test/` directory with the name `[entity].e2e-spec.ts`
+    -   Multiple test suites can be defined per file
+-   All test suites are executed in parallel, but each individual test instead a suite is executed sequentially
+-   Before each test suite is executed, a new instance of the Nest.js API is created for that suite to test
+    -   A random port number is used to prevent collision
+-   Each test case inside the suite performs one or more graphql queries/mutations to ensure the expected integrated functionality between the API, the database, and anything in between
+-   After all tests have completed (whether pass or fail), the Nest.js application created for that specific test suite is destroyed
+
+# Code Consistency
+
+## Linting
+
+[Rome](https://rome.tools/) is the project's linting & formatting tool of choice. It includes several defaults out of the box, which generally serve to improve the developer experience by eliminating compelx configurations and the perpetual debates that often surround specific rules. Its configuration is defined in the root-level [`rome.json`](https://github.com/crimlog/api/blob/dev/rome.json) file.
+
+Another benefit of Rome's lack of configuration options (when compared to alternatives such as [ESLint](https://eslint.org/) or [JSLint](https://www.jslint.com/)) is the "freedom" it can offer developers, even on teams, in making some personal coding style decisions. The Crimlog development team is currently small enough to where a slight degree of flexibility like this can end up making software development a more pleasant process. There is no arbitrary linter established by some senior developer 10 years ago that harasses you for every other line of code that you write. Instead, there's a lightweight, minimal linter that provides occasional suggestions for the purpose of enforcing a high-level coding standard, while still allowing you the freedom to code how you prefer and are used to. The humanity of developers can often be overlooked in work environments, and Crimlog aims to preserve the importance of human idiosyncrasy as much as possible.
+
+Although linting can be performed entirely through the CLI, installing the [Rome IDE extension](#rome-vs-code-extension) is recommended for convenience. Linting via CLI is managed through npm scripts. `pnpm lint` will output detected issues, and `pnpm lint:fix` will automatically resolve them (when possible).
+
+**Explanation of Crimlog specific linting rules that have been disabled**:
+
+### [complexity.noExtraBooleanCast](https://docs.rome.tools/lint/rules/noextrabooleancast/)
+
+Although many uses of the double-bang operator (`!!`) are criticized for unnecessary complexity, those attacks often end up being overstatements. The double-bang operator, when used appropriately, provides immediately knowledge to the developer viewing it that the subject value is not a boolean.
+
+JavaScript type coercion, while a beautiful feature, is frequently abused. For example:
+
+```js
+if(data) { ... }
+```
+
+The developer reading this without any knowledge of the codebase would have very little clue as to the type of `data`. Disregarding TypeScript, because JavaScript is what coerces values at runtime, it is unknown if `data` is a boolean, number, string, object, or anything else. Consider, on the other hand:
+
+```js
+if(!!data) { ... }
+```
+
+With the double-negation, it is clear to anyone who reads the code in the future that `data` is not a boolean. Developers can avoid any trivial mistakes made in the coding or debugging that would treat `data` as an explicit boolean during runtime.]
+
+Double-negation is preferred over the `Boolean()` constructor because of its shorter character count.
+
+### [performance.noDelete](https://docs.rome.tools/lint/rules/noDelete/)
+
+The `delete` operator in JavaScript is reasonably safe to use and only [inefficent in loops](https://levelup.gitconnected.com/5-facts-about-delete-operator-in-javascript-c16fd2588cd). It's a convenience operator that, when used responsibly, offers improved readability and syntactic simplicity.
+
+### [suspicious.noExplicitAny](https://docs.rome.tools/lint/rules/noexplicitany/)
+
+Frankly, using the `any` type defeats the purpose of writing code in TypeScript over JavaScript in the first place. If dynamic types are desired, simply return to the hassle-free environment of interpreted JavaScript and avoid the headaches associated with turning a dynamically typed language into a compiled one.
+
+Unfortunately, in the JS ecosystem, dynamic types are nearly inevitable, even when using TypeScript. Usage of third-party libraries is a great example. For reasons like this, the `any` type is **restrictively allowed** in the Crimlog API. It is heavily discouraged, and the linter will provide warnings instead of errors. Developers are encouraged to pursue other solutions, such as the [`unknown`](https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown)/[`never`](https://www.typescriptlang.org/docs/handbook/2/functions.html#never) types or [Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html).
+
+## Formatting
+
+As established above, [Rome](https://rome.tools/) is also used for formatting, although its functionality is currently limited to JavaScript and TypeScript files. Its configuration is defined in the root-level [`rome.json`](https://github.com/crimlog/api/blob/dev/rome.json) file. To view formatting issues via CLI, use the npm script `pnpm format`. To automatically fix formatting issues via CLI, use the npm script `pnpm format:fix`.
+
+To supplement areas that the Rome formatter cannot reach, we use [Prettier](https://prettier.io/). However, all Prettier formatting is performed at the IDE level, and is not included in the npm depencies or any CI pipelines. IDE-level formatting is achieved through integrations such as the [Prettier extension for VSCode](#prettier-formatter-for-visual-studio-code).
+
+General formatting settings can be found in [`.vscode/settings.json`](https://github.com/crimlog/api/blob/dev/.vscode/settings.json). Here is a brief summary:
+
+-   Semicolons are **always** used
+-   Single quotes are always used unless impractical (e.g. escaping contractions: `'don\'t do this'`)
+-   Trailing commas are always used on multiline items (including function parameters/arguments)
+-   LF is the preferred EOL character
+-   Lines are indented with tabs instead of spaces
+-   Organize import statements
+    -   External modules appear before relative modules
+    -   All import statements are sorted by module name, ascending
+    -   All named imports are sorted by export name, ascending
+    -   Relative module imports should always be used for local project files
+    -   Relative module file extensions should be omitted wherever possible (e.g. `app.module` instead of `app.module.ts`)
+
+## TypeScript Typing
+
+All TypeScript standards from linting apply. Additionally:
+
+-   Explicitly declare types as often as practical
+-   Prefer `unknown` over `any`
+
+## Other
+
+-   Use singular form for top-level entity names
+    -   Plural form may be used for entity fields when the field will contain multiples of something (e.g. an array)
