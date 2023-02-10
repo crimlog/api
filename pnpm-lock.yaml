@@ -30,7 +30,7 @@ specifiers:
   reflect-metadata: 0.1.13
   rome: 11.0.0
   rxjs: 7.8.0
-  spectaql: 2.0.3
+  spectaql: 2.0.4
   ts-jest: 29.0.3
   ts-node: 10.9.1
   tsconfig-paths: 4.1.2
@@ -68,7 +68,7 @@ devDependencies:
   jest: 29.4.2_3dpyt47f6qjvjya67kxananmoa
   prisma: 4.6.1
   rome: 11.0.0
-  spectaql: 2.0.3_josqdphe72ehbhbupbbzkccy6y
+  spectaql: 2.0.4_josqdphe72ehbhbupbbzkccy6y
   ts-jest: 29.0.3_wdrv4pzrykhj64rvi5ptad6k5m
   ts-node: 10.9.1_yycniztvs25mi3pxrdtzbgr3je
   tsconfig-paths: 4.1.2
@@ -159,8 +159,8 @@ packages:
       - chokidar
     dev: true
 
-  /@anvilco/apollo-server-plugin-introspection-metadata/2.0.0:
-    resolution: {integrity: sha512-8P6GWO/eZqFjJNNt5FRFTkg00qfJJjR1PZsiWBzjB27rEZ5V4CV3KUQlQyJkT+1YjF1eFfhCHIGo5F+yJRmx6A==}
+  /@anvilco/apollo-server-plugin-introspection-metadata/2.0.1:
+    resolution: {integrity: sha512-IL5ssMS3qBNwcVAs1/VERU6BHdGuTbi0id5Qb/pQ9N9/BNveWIXnWVyTzlpB0hAqh7ju2AhDrgqjsus+eAOy5w==}
     engines: {node: '>=14'}
     dependencies:
       lodash.get: 4.4.2
@@ -1435,16 +1435,6 @@ packages:
       graphql: 16.6.0
       tslib: 2.5.0
 
-  /@graphql-tools/merge/8.3.14_graphql@16.6.0:
-    resolution: {integrity: sha512-zV0MU1DnxJLIB0wpL4N3u21agEiYFsjm6DI130jqHpwF0pR9HkF+Ni65BNfts4zQelP0GjkHltG+opaozAJ1NA==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      '@graphql-tools/utils': 9.1.3_graphql@16.6.0
-      graphql: 16.6.0
-      tslib: 2.5.0
-    dev: true
-
   /@graphql-tools/merge/8.3.18_graphql@16.6.0:
     resolution: {integrity: sha512-R8nBglvRWPAyLpZL/f3lxsY7wjnAeE0l056zHhcO/CgpvK76KYUt9oEkR05i8Hmt8DLRycBN0FiotJ0yDQWTVA==}
     peerDependencies:
@@ -1565,18 +1555,6 @@ packages:
       tslib: 2.5.0
       value-or-promise: 1.0.11
 
-  /@graphql-tools/schema/9.0.12_graphql@16.6.0:
-    resolution: {integrity: sha512-DmezcEltQai0V1y96nwm0Kg11FDS/INEFekD4nnVgzBqawvznWqK6D6bujn+cw6kivoIr3Uq//QmU/hBlBzUlQ==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      '@graphql-tools/merge': 8.3.14_graphql@16.6.0
-      '@graphql-tools/utils': 9.1.3_graphql@16.6.0
-      graphql: 16.6.0
-      tslib: 2.5.0
-      value-or-promise: 1.0.11
-    dev: true
-
   /@graphql-tools/schema/9.0.16_graphql@16.6.0:
     resolution: {integrity: sha512-kF+tbYPPf/6K2aHG3e1SWIbapDLQaqnIHVRG6ow3onkFoowwtKszvUyOASL6Krcv2x9bIMvd1UkvRf9OaoROQQ==}
     peerDependencies:
@@ -1660,15 +1638,6 @@ packages:
     dependencies:
       graphql: 16.6.0
       tslib: 2.5.0
-
-  /@graphql-tools/utils/9.1.3_graphql@16.6.0:
-    resolution: {integrity: sha512-bbJyKhs6awp1/OmP+WKA1GOyu9UbgZGkhIj5srmiMGLHohEOKMjW784Sk0BZil1w2x95UPu0WHw6/d/HVCACCg==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      graphql: 16.6.0
-      tslib: 2.5.0
-    dev: true
 
   /@graphql-tools/utils/9.2.1_graphql@16.6.0:
     resolution: {integrity: sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==}
@@ -3791,17 +3760,17 @@ packages:
       delayed-stream: 1.0.0
     dev: true
 
+  /commander/10.0.0:
+    resolution: {integrity: sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==}
+    engines: {node: '>=14'}
+    dev: true
+
   /commander/2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
   /commander/4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
-    dev: true
-
-  /commander/9.5.0:
-    resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==}
-    engines: {node: ^12.20.0 || >=14}
     dev: true
 
   /common-tags/1.8.2:
@@ -6567,8 +6536,8 @@ packages:
     resolution: {integrity: sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==}
     engines: {node: '>= 0.6'}
 
-  /microfiber/2.0.0:
-    resolution: {integrity: sha512-DpCCQFUHhalmWkbpxohp8KkDCuQDyXVA/Om7c4sxXwZNEk/f379O+t03GGVsJwYnnjcF2aqGxLmairlPdqmUEg==}
+  /microfiber/2.0.1:
+    resolution: {integrity: sha512-AncT2Xrs01ejYrnmYz7Z6QnOT3Kfu9du/fC3VHxOCjFm+W9Bn1eOQKmmLrj2anxS6A8mbPBo3Ij5w9dHJSFOgg==}
     engines: {node: '>=14'}
     dependencies:
       lodash.defaults: 4.2.0
@@ -7734,20 +7703,20 @@ packages:
     deprecated: Please use @jridgewell/sourcemap-codec instead
     dev: true
 
-  /spectaql/2.0.3_josqdphe72ehbhbupbbzkccy6y:
-    resolution: {integrity: sha512-PwKzifjzgo7GPkrOcf3uBpnii4YbXJtxlOWmNDatqGE6gW9tsuzryuttKPVML+twKCOEZxZv8PBCB0P7gWuYIw==}
+  /spectaql/2.0.4_josqdphe72ehbhbupbbzkccy6y:
+    resolution: {integrity: sha512-AZt403ABZ7M3U6EkIHVvtzLUBlHogIBzeBsV5qJcumPcfmrG5YogSfw0mV8I8GKonzOzF/RR0IQUcO2Bc0EnvQ==}
     engines: {node: '>=14', npm: '>=7'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@anvilco/apollo-server-plugin-introspection-metadata': 2.0.0
+      '@anvilco/apollo-server-plugin-introspection-metadata': 2.0.1
       '@graphql-tools/load-files': 6.6.1_graphql@16.6.0
-      '@graphql-tools/merge': 8.3.14_graphql@16.6.0
-      '@graphql-tools/schema': 9.0.12_graphql@16.6.0
-      '@graphql-tools/utils': 9.1.3_graphql@16.6.0
+      '@graphql-tools/merge': 8.3.18_graphql@16.6.0
+      '@graphql-tools/schema': 9.0.16_graphql@16.6.0
+      '@graphql-tools/utils': 9.2.1_graphql@16.6.0
       cheerio: 1.0.0-rc.12
       coffeescript: 2.7.0
-      commander: 9.5.0
+      commander: 10.0.0
       fast-glob: 3.2.12
       foundation-sites: 6.7.5_josqdphe72ehbhbupbbzkccy6y
       graceful-fs: 4.2.10
@@ -7771,7 +7740,7 @@ packages:
       json5: 2.2.3
       lodash: 4.17.21
       marked: 4.2.5
-      microfiber: 2.0.0
+      microfiber: 2.0.1
       postcss: 8.4.21
       sass: 1.57.1
       sync-request: 6.1.0
