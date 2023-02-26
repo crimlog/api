@@ -18,6 +18,14 @@ export class AttendanceQueueResolver {
 		return this.attendanceQueueService.findAll(include);
 	}
 
+	@Query()
+	attendanceQueueByCourseId(
+		@Args('courseId') id: string,
+		@GetIncludeObj(attendanceQueueInclude) include,
+	) {
+		return this.attendanceQueueService.attendanceQueueByCourseId(id, include);
+	}
+
 	@Mutation()
 	attendanceQueueCreate(
 		@Args('attendanceQueue') attendanceQueue: AttendanceQueueInput,

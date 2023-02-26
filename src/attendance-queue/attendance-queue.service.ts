@@ -15,6 +15,13 @@ export class AttendanceQueueService {
 		return this.prisma.attendanceQueue.findUnique({ where: { id }, include });
 	}
 
+	attendanceQueueByCourseId(courseId: string, include = attendanceQueueInclude) {
+		return this.prisma.attendanceQueue.findFirst({
+			where: { courseId, status: 'ACTIVE' },
+			include,
+		});
+	}
+
 	async attendanceQueueCreate(
 		attendanceQueue: AttendanceQueueInput,
 		include = attendanceQueueInclude,
