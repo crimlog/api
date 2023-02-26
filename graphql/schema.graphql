@@ -126,6 +126,8 @@ type Query {
 	# Retrieve all [`AttendanceQueues`]({{Types.AttendanceQueue}}) with a `status` of
 	#activeAttendanceQueues: [AttendanceQueue]!
 	#studentActiveAttendanceQueues(studentId: Int!): [AttendanceQueue]!
+	"Retrieve a single [`AttendanceQueue`]({{Types.AttendanceQueue}}) by [`Course`]({{Types.Course}}) ID"
+	attendanceQueueByCourseId(courseId: ObjectID!): AttendanceQueue
 
 	"Retrieve the unsigned nonce for a [`Professor`]({{Types.Professor}})'s wallet address"
 	professorNonce(
