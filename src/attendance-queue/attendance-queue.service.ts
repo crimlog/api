@@ -156,7 +156,6 @@ export class AttendanceQueueService {
 			data: {
 				id: txn.hash,
 				timestamp: Date.now(),
-				imageURL: 'test.com',
 				studentId,
 				courseId: course.id,
 				professorId: course.professorId,

@@ -6,7 +6,7 @@ import {
 	ApolloServerPluginLandingPageProductionDefault,
 } from 'apollo-server-core';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
-import { ObjectIDResolver, TimestampResolver } from 'graphql-scalars';
+import { JWTResolver, ObjectIDResolver, TimestampResolver } from 'graphql-scalars';
 import { PrismaModule } from '../prisma/prisma.module';
 import { AttendanceQueueModule } from './attendance-queue/attendance-queue.module';
 import { AttendanceRecordModule } from './attendance-record/attendance-record.module';
@@ -30,7 +30,7 @@ import { StudentModule } from './student/student.module';
 					: ApolloServerPluginLandingPageLocalDefault(),
 			],
 			typePaths: ['./**/*/*.graphql'],
-			resolvers: {ObjectID: ObjectIDResolver, Timestamp: TimestampResolver},
+			resolvers: {ObjectID: ObjectIDResolver, Timestamp: TimestampResolver, JWT: JWTResolver},
 			// so, this lets us leverage the root-level "errors" property returned in the response json
 			// (on the same level as data)
 			formatError: (error: GraphQLError) => {

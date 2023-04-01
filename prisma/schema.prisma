@@ -55,7 +55,7 @@ model AttendanceRecord {
     courseId    String    @db.ObjectId
     course      Course    @relation(fields: [courseId], references: [id])
     timestamp   Int
-    imageURL    String
+    imageURL    String?
 }
 
 enum AttendanceQueueStatus {
