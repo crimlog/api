@@ -11,6 +11,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { AttendanceQueueModule } from './attendance-queue/attendance-queue.module';
 import { AttendanceRecordModule } from './attendance-record/attendance-record.module';
 import { AuthModule } from './auth/auth.module';
+import { ContractModule } from './contracts/contract.module';
 import { CourseModule } from './course/course.module';
 import { ProfessorModule } from './professor/professor.module';
 import { StudentModule } from './student/student.module';
@@ -47,6 +48,7 @@ import { StudentModule } from './student/student.module';
 		AttendanceRecordModule,
 		AttendanceQueueModule,
 		AuthModule,
+		ContractModule,
 	],
 })
 export class AppModule {}
