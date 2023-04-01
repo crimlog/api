@@ -47,7 +47,7 @@ type Course {
 
 "Represents the blockchain transaction of a student attendance record"
 type AttendanceRecord {
-	id: ObjectID!
+	id: ID!
 	student: Student!
 	professor: Professor!
 	course: Course!
@@ -169,6 +169,13 @@ type Mutation {
 		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) to issue a minting for"
 		queueId: ObjectID!
 	): [AttendanceRecord]
+	"Mint an [`AttendanceRecord`]({{Types.AttendanceRecord}}) for a single [`Student`]({{Types.Student}}) in an [`AttendanceQueue`]({{Types.AttendanceQueue}})"
+	attendanceQueueMintStudent(
+		"ID of the [`AttendanceQueue`]({{Types.AttendanceQueue}}) that contains the [`Student`]({{Types.Student}})"
+		queueId: ObjectID!
+		"ID of the [`Student`]({{Types.Student}}) to issue a minting for"
+		studentId: Int!
+	): AttendanceRecord
 
 	"Authenticate a [`Professor`]({{Types.Professor}}) through digital signature and receive a JWT response"
 	professorLogin(

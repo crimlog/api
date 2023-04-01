@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { AttendanceQueueInput } from '../../graphql/typings';
 import { PrismaService } from '../../prisma/prisma.service';
-import { attendanceQueueInclude } from '../prisma-query-types';
+import { ContractService } from '../contracts/contract.service';
+import { attendanceQueueInclude, attendanceRecordInclude } from '../prisma-query-types';
 
 @Injectable()
 export class AttendanceQueueService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService, private contractService: ContractService) {}
 
 	findAll(include = attendanceQueueInclude) {
 		return this.prisma.attendanceQueue.findMany({ include });
@@ -123,10 +124,46 @@ export class AttendanceQueueService {
 		});
 	}
 
-	attendanceQueueMint(queueId: string, include = attendanceQueueInclude) {
+	attendanceQueueMint(queueId: string, include = attendanceRecordInclude) {
 		// set queue status to MINTING before minting begins
 		// set queue status to COMPLETE after minting is complete
 
 		throw new Error('This method is unsupported');
+	}
+
+	async attendanceQueueMintStudent(
+		queueId: string,
+		studentId: number,
+		include = attendanceRecordInclude,
+	) {
+		const student = await this.prisma.student.findUnique({ where: { id: studentId } });
+
+		const txn = await this.contractService.mint(student.walletAddress);
+
+		const { course } = await this.prisma.attendanceQueue.findUnique({
+			where: { id: queueId },
+			select: {
+				course: {
+					select: {
+						id: true,
+						professorId: true,
+					},
+				},
+			},
+		});
+
+		const record = await this.prisma.attendanceRecord.create({
+			data: {
+				id: txn.hash,
+				timestamp: Date.now(),
+				imageURL: 'test.com',
+				studentId,
+				courseId: course.id,
+				professorId: course.professorId,
+			},
+			include,
+		});
+
+		return record;
 	}
 }

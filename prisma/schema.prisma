@@ -47,7 +47,7 @@ model Course {
 }
 
 model AttendanceRecord {
-    id          String    @id @default(auto()) @map("_id") @db.ObjectId
+    id          String    @id @map("_id")
     studentId   Int
     student     Student   @relation(fields: [studentId], references: [id])
     professorId String    @db.ObjectId
