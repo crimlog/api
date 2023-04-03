@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { AttendanceQueueInput } from '../../graphql/typings';
 import { PrismaService } from '../../prisma/prisma.service';
-import { attendanceQueueInclude } from '../prisma-query-types';
+import { ContractService } from '../contracts/contract.service';
+import { attendanceQueueInclude, attendanceRecordInclude } from '../prisma-query-types';
 
 @Injectable()
 export class AttendanceQueueService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService, private contractService: ContractService) {}
 
 	findAll(include = attendanceQueueInclude) {
 		return this.prisma.attendanceQueue.findMany({ include });
@@ -123,10 +124,79 @@ export class AttendanceQueueService {
 		});
 	}
 
-	attendanceQueueMint(queueId: string, include = attendanceQueueInclude) {
-		// set queue status to MINTING before minting begins
-		// set queue status to COMPLETE after minting is complete
+	async attendanceQueueMint(queueId: string, include = attendanceRecordInclude) {
+		// retrieve AttendanceQueue
+		const queue = await this.prisma.attendanceQueue.findUnique({
+			where: { id: queueId },
+		});
 
-		throw new Error('This method is unsupported');
+		// check if queue exists
+		if (!queue) throw new Error(`Queue ${queueId} does not exist`);
+		// check if queue is active
+		if (queue.status !== 'ACTIVE') throw new Error(`Queue ${queueId} is already ${queue.status}`);
+
+		// set queue status to MINTING before minting begins
+		await this.prisma.attendanceQueue.update({
+			where: { id: queueId },
+			data: {
+				status: 'MINTING',
+			},
+		});
+
+		// mint for each student in queue
+		const records = [];
+		for (const studentId of queue.studentIds)
+			records.push(await this.attendanceQueueMintStudent(queueId, studentId, include));
+
+		// set queue status to COMPLETE after minting is complete
+		await this.prisma.attendanceQueue.update({
+			where: { id: queueId },
+			data: {
+				status: 'COMPLETE',
+			},
+		});
+
+		return records;
+	}
+
+	async attendanceQueueMintStudent(
+		queueId: string,
+		studentId: number,
+		include = attendanceRecordInclude,
+	) {
+		const queue = await this.prisma.attendanceQueue.findUnique({
+			where: { id: queueId },
+			select: {
+				course: {
+					select: {
+						id: true,
+						professorId: true,
+					},
+				},
+				status: true,
+			},
+		});
+
+		// check if queue exists
+		if (!queue) throw new Error(`Queue ${queueId} does not exist`);
+		// check if queue is active
+		if (queue.status !== 'ACTIVE') throw new Error(`Queue ${queueId} is already ${queue.status}`);
+
+		const student = await this.prisma.student.findUnique({ where: { id: studentId } });
+
+		const txn = await this.contractService.mint(student.walletAddress);
+
+		const record = await this.prisma.attendanceRecord.create({
+			data: {
+				id: txn.hash,
+				timestamp: Date.now(),
+				studentId,
+				courseId: queue.course.id,
+				professorId: queue.course.professorId,
+			},
+			include,
+		});
+
+		return record;
 	}
 }

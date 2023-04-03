@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AttendanceQueueInput } from '../../graphql/typings';
 import { GetIncludeObj } from '../decorators/getIncludeObj.decorator';
-import { attendanceQueueInclude } from '../prisma-query-types';
+import { attendanceQueueInclude, attendanceRecordInclude } from '../prisma-query-types';
 import { AttendanceQueueService } from './attendance-queue.service';
 
 @Resolver('AttendanceQueue')
@@ -63,8 +63,17 @@ export class AttendanceQueueResolver {
 	@Mutation()
 	attendanceQueueMint(
 		@Args('queueId') queueId: string,
-		@GetIncludeObj(attendanceQueueInclude) include,
+		@GetIncludeObj(attendanceRecordInclude) include,
 	) {
 		return this.attendanceQueueService.attendanceQueueMint(queueId, include);
+	}
+
+	@Mutation()
+	attendanceQueueMintStudent(
+		@Args('queueId') queueId: string,
+		@Args('studentId') studentId: number,
+		@GetIncludeObj(attendanceRecordInclude) include,
+	) {
+		return this.attendanceQueueService.attendanceQueueMintStudent(queueId, studentId, include);
 	}
 }
