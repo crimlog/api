@@ -18,7 +18,8 @@ export class AttendanceQueueService {
 
 	attendanceQueueByCourseId(courseId: string, include = attendanceQueueInclude) {
 		return this.prisma.attendanceQueue.findFirst({
-			where: { courseId, status: 'ACTIVE' },
+			orderBy: { timestamp: 'desc' },
+			where: { courseId },
 			include,
 		});
 	}
@@ -180,7 +181,7 @@ export class AttendanceQueueService {
 		// check if queue exists
 		if (!queue) throw new Error(`Queue ${queueId} does not exist`);
 		// check if queue is active
-		if (queue.status !== 'ACTIVE') throw new Error(`Queue ${queueId} is already ${queue.status}`);
+		if (queue.status === 'CLOSED') throw new Error(`Queue ${queueId} is already ${queue.status}`);
 
 		const student = await this.prisma.student.findUnique({ where: { id: studentId } });
 
