@@ -3,6 +3,7 @@ name: 'Terraform'
 on:
     push:
         branches:
+            - test
             - dev
 
 env:
