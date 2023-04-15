@@ -57,7 +57,6 @@ resource "aws_ecs_service" "service" {
     ]
     subnets = [
       aws_subnet.subnet["us-east-1b"].id,
-      aws_subnet.subnet["us-east-1d"].id
     ]
   }
 
