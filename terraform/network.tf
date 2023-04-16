@@ -1,6 +1,7 @@
 locals {
   subnet_availability_zones = [
     "us-east-1b",
+    "us-east-1d",
   ]
 
   # divide a large CIDR into smaller CIDRs for each environment's VPC

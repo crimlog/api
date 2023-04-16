@@ -35,6 +35,7 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   subnets = [
     aws_subnet.subnet["us-east-1b"].id,
+    aws_subnet.subnet["us-east-1d"].id,
   ]
   internal                         = false
   ip_address_type                  = "ipv4"
