@@ -1,4 +1,8 @@
-FROM node:16 AS build
+FROM node:16 as base
+
+RUN npm i -g pnpm
+
+FROM base AS build
 
 WORKDIR /usr/src/app
 
@@ -32,7 +36,7 @@ COPY --from=build /usr/src/app/node_modules/.prisma/ /usr/src/app/node_modules/.
 
 COPY --from=build /usr/src/app/node_modules/@prisma/ /usr/src/app/node_modules/@prisma/
 
-RUN pnpm install --production
+RUN pnpm install --prod
 
 CMD [ "node", "dist/src/main.js"]
 
