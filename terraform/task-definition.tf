@@ -34,6 +34,28 @@ locals {
   }
 
   definitions = {
+    test = jsonencode([
+      merge(local.base_definition, {
+        secrets = [
+          {
+            name      = "JWT_SECRET",
+            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:JWT_SECRET::"
+          },
+          {
+            name      = "DATABASE_URL",
+            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:DATABASE_URL::"
+          },
+          {
+            name      = "ALCHEMY_API_KEY",
+            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:ALCHEMY_API_KEY::"
+          },
+          {
+            name      = "MATIC_PRIVATE_KEY",
+            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:MATIC_PRIVATE_KEY::"
+          }
+        ]
+      })
+    ])
     dev = jsonencode([
       merge(local.base_definition, {
         secrets = [
