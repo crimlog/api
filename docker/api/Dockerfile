@@ -16,11 +16,11 @@ RUN npm i
 
 COPY . .
 
-RUN npm prisma:generate
+RUN npm run prisma:generate
 
-RUN npm graphql-codegen
+RUN npm run graphql-codegen
 
-RUN npm build
+RUN npm run build
 
 FROM node:16 as deploy
 
@@ -40,7 +40,7 @@ COPY --from=build /usr/src/app/node_modules/.prisma/ /usr/src/app/node_modules/.
 
 COPY --from=build /usr/src/app/node_modules/@prisma/ /usr/src/app/node_modules/@prisma/
 
-RUN npm install --prod
+RUN npm install --production
 
 CMD [ "node", "dist/src/main.js"]
 
