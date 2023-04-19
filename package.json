@@ -8,6 +8,7 @@
 		"pnpm": ">=7.0.0"
 	},
 	"scripts": {
+		"build": "nest build",
 		"start:dev": "nest start --watch",
 		"docs": "spectaql -D spectaql.yml",
 		"docs:build": "spectaql -1 spectaql.yml",

@@ -13,6 +13,7 @@ import { AttendanceRecordModule } from './attendance-record/attendance-record.mo
 import { AuthModule } from './auth/auth.module';
 import { ContractModule } from './contracts/contract.module';
 import { CourseModule } from './course/course.module';
+import { HealthController } from './health/health.controller';
 import { ProfessorModule } from './professor/professor.module';
 import { StudentModule } from './student/student.module';
 
@@ -50,5 +51,6 @@ import { StudentModule } from './student/student.module';
 		AuthModule,
 		ContractModule,
 	],
+	controllers:[HealthController]
 })
 export class AppModule {}
