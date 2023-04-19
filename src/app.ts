@@ -12,7 +12,7 @@ export async function initializeApp(
 	}: { logger?: false | LoggerService | LogLevel[]; abortOnError?: boolean } = {},
 ) {
 	app = await NestFactory.create(AppModule, { logger, abortOnError });
-
+	app.enableCors();
 	await app.listen(PORT);
 
 	return app.getHttpServer().address();
