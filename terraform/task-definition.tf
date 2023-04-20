@@ -1,7 +1,7 @@
 locals {
   base_definition = {
     name  = "graphql-api-${var.environment}-container",
-    image = "479401498383.dkr.ecr.us-east-1.amazonaws.com/graphql-api:${var.image_tag}",
+    image = "043894507808.dkr.ecr.us-east-1.amazonaws.com/graphql-api:${var.image_tag}",
     cpu   = 0,
     portMappings = [
       {
@@ -61,19 +61,19 @@ locals {
         secrets = [
           {
             name      = "JWT_SECRET",
-            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:JWT_SECRET::"
+            valueFrom = "arn:aws:secretsmanager:us-east-1:043894507808:secret:graphql-api-secrets-ajTuEN:JWT_SECRET::"
           },
           {
             name      = "DATABASE_URL",
-            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:DATABASE_URL::"
+            valueFrom = "arn:aws:secretsmanager:us-east-1:043894507808:secret:graphql-api-secrets-ajTuEN:DATABASE_URL::"
           },
           {
             name      = "ALCHEMY_API_KEY",
-            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:ALCHEMY_API_KEY::"
+            valueFrom = "arn:aws:secretsmanager:us-east-1:043894507808:secret:graphql-api-secrets-ajTuEN:ALCHEMY_API_KEY::"
           },
           {
             name      = "MATIC_PRIVATE_KEY",
-            valueFrom = "arn:aws:secretsmanager:us-east-1:479401498383:secret:graphql-api-secrets-46UvoX:MATIC_PRIVATE_KEY::"
+            valueFrom = "arn:aws:secretsmanager:us-east-1:043894507808:secret:graphql-api-secrets-ajTuEN:MATIC_PRIVATE_KEY::"
           }
         ]
       })
