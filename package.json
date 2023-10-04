@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"@metamask/eth-sig-util": "5.0.2",
-		"@nestjs/apollo": "10.2.1",
+		"@nestjs/apollo": "11.0.6",
 		"@nestjs/common": "9.4.0",
 		"@nestjs/core": "9.4.0",
 		"@nestjs/graphql": "10.2.1",
