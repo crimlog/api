@@ -82,8 +82,8 @@ devDependencies:
     specifier: 16.0.3
     version: 16.0.3
   graphql-request:
-    specifier: 5.1.0
-    version: 5.1.0(graphql@16.6.0)
+    specifier: 5.2.0
+    version: 5.2.0(graphql@16.6.0)
   jest:
     specifier: 29.5.0
     version: 29.5.0(@types/node@16.18.23)(ts-node@10.9.1)
@@ -1828,7 +1828,7 @@ packages:
       debug: 4.3.4
       dotenv: 16.0.3
       graphql: 16.6.0
-      graphql-request: 5.1.0(graphql@16.6.0)
+      graphql-request: 5.2.0(graphql@16.6.0)
       http-proxy-agent: 5.0.0
       https-proxy-agent: 5.0.1
       jose: 4.13.1
@@ -5153,8 +5153,8 @@ packages:
       - supports-color
     dev: false
 
-  /graphql-request@5.1.0(graphql@16.6.0):
-    resolution: {integrity: sha512-0OeRVYigVwIiXhNmqnPDt+JhMzsjinxHE7TVy3Lm6jUzav0guVcL0lfSbi6jVTRAxcbwgyr6yrZioSHxf9gHzw==}
+  /graphql-request@5.2.0(graphql@16.6.0):
+    resolution: {integrity: sha512-pLhKIvnMyBERL0dtFI3medKqWOz/RhHdcgbZ+hMMIb32mEPa5MJSzS4AuXxfI4sRAu6JVVk5tvXuGfCWl9JYWQ==}
     peerDependencies:
       graphql: 14 - 16
     dependencies:
